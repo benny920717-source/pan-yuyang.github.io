@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="utf-8">
+<title>擬古系列 - Pan Yu-Yang</title>
+
+<style>
+body {
+    font-family: Helvetica, Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #000000; 
+    color: #ffffff;            
+    display: flex; 
+    min-height: 100vh;
+}
+
+/* 左側側邊欄維持一致 */
+.sidebar {
+    width: 260px;
+    padding: 60px 40px;
+    border-right: 1px solid #222; 
+    position: fixed; 
+    height: 100vh;
+    box-sizing: border-box;
+}
+
+.sidebar h2 {
+    font-size: 22px;
+    font-weight: normal;
+    margin-bottom: 40px;
+    letter-spacing: 2px;
+}
+
+.menu-item {
+    display: block;
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 16px;
+    margin-bottom: 24px;
+}
+
+.menu-item:hover, .submenu-item:hover {
+    color: #aaaaaa;
+}
+
+.submenu {
+    margin-left: 15px;
+    margin-bottom: 24px;
+    border-left: 1px solid #333; 
+    padding-left: 15px;
+}
+
+.submenu-item {
+    display: block;
+    text-decoration: none;
+    color: #888888; 
+    font-size: 14px;
+    margin-bottom: 12px;
+}
+
+/* 讓使用者知道目前停留在「擬古系列」 */
+.submenu-item.active {
+    color: #ffffff;
+    font-weight: bold;
+    pointer-events: none;
+}
+
+/* 右側主要內容區：嚴格控制作品的垂直排列 */
+.main-content {
+    margin-left: 260px; 
+    padding: 60px 80px;
+    max-width: 800px; /* 限制寬度，讓長幅作品在螢幕上大小適中 */
+    width: 100%;
+    box-sizing: border-box;
+}
+
+h1 {
+    font-size: 24px;
+    font-weight: normal;
+    margin-bottom: 60px;
+    letter-spacing: 2px;
+    color: #ffffff;
+}
+
+/* 獨立的作品外殼，確保圖文垂直堆疊且互不干擾 */
+.work-card {
+    display: flex;
+    flex-direction: column; /* 確保內容由上至下垂直排列 */
+    margin-bottom: 80px;   /* 作品與作品之間的舒適間距 */
+}
+
+.work-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    letter-spacing: 1px;
+}
+
+.work-img-wrapper {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.work-img-wrapper img {
+    width: 100%;
+    max-width: 100%;
+    display: block;
+    height: auto;
+}
+
+.work-info {
+    font-size: 13px;
+    color: #888888;            
+    margin-bottom: 15px;
+    letter-spacing: 1px;
+}
+
+.work-text {
+    font-size: 15px;
+    line-height: 1.8;
+    color: #cccccc;            
+    white-space: pre-line; /* 保留你故事原本的換行 */
+}
+</style>
+</head>
+
+<body>
+
+<nav class="sidebar">
+    <h2>Pan Yu-Yang</h2>
+    <a href="about.html" class="menu-item">藝術家介紹</a>
+    <span class="menu-item" style="font-weight: bold;">作品</span>
+    <div class="submenu">
+        <a href="printmaking.html" class="submenu-item">版畫系列</a>
+        <a href="pseudo-classic.html" class="submenu-item active">擬古系列</a>
+    </div>
+    <a href="writing.html" class="menu-item">書寫</a>
+</nav>
+
+<main class="main-content">
+
+    <h1>作品 / 擬古系列</h1>    
+
+    <div class="work-card">
+        <div class="work-title">牧書圖</div>
+        <div class="work-img-wrapper">
+            <img src="牧書圖_全貌.jpg">
+        </div>
+        <div class="work-info">2024｜原子筆、牛皮紙｜20 × 40 cm</div>
+        <div class="work-text">畫作的靈感來自成語「牛角掛書」，
+        呈現書本掛在牛角上、一邊遊走一邊閱讀的自在氛圍。
+        構圖向臺灣前輩藝術家黃土水的淺浮雕作品《水牛群像》致敬，
+        形式模仿傳統水墨畫卷，
+        並以印章文字作為述說故事的載體。</div>
+    </div>
+        
+    <div class="work-card">
+        <div class="work-title">七仙女圖</div>
+        <div class="work-img-wrapper">
+            <img src="七仙女圖_全貌.jpg">
+        </div>
+        <div class="work-info">2024｜原子筆、牛皮紙｜35 × 54 cm</div>
+        <div class="work-text">小時候，
+        每次過年回到阿公阿嬤家，
+        總可以和姐姐、堂姐、表姐一起聊天吃飯玩樂；
+        但是隨著姐姐們長大、工作、結婚，
+        過年的氣氛不再那麼熱鬧。
+        因此我畫了一張七仙女圖，
+        紀念之前這段美好的時光。</div>
+    </div>
+
+    <div class="work-card">
+        <div class="work-title">七擒七縱圖</div>
+        <div class="work-img-wrapper">
+            <img src="七擒七縱圖_全貌.jpg">
+        </div>
+        <div class="work-info">2024｜原子筆、牛皮紙｜35 × 54 cm</div>
+        <div class="work-text">「七擒七縱」出自《三國志》，
+        描述諸葛亮七次生擒、釋放南夷酋長孟獲，
+        直到其心悅誠服，不再生背叛之心。
+        這張畫作嘗試將古代的歷史故事移至當代的情境中，
+        思考人類面對敵人的時候真的能具備足夠的智慧與耐心嗎？</div>
+    </div>
+
+</main>
+
+</body>
+</html>
