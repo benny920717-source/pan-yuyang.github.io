@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>藝術家介紹 - Pan Yu-Yang</title>
+<title>介紹 - Pan Yu-Yang</title>
 
 <style>
 body {
@@ -40,17 +40,28 @@ body {
     color: #ffffff;
     font-size: 16px;
     margin-bottom: 24px;
+    cursor: pointer;
+    user-select: none;
 }
 
 .menu-item:hover, .submenu-item:hover {
     color: #aaaaaa;
 }
 
+/* 預設隱藏的子選單外殼 */
 .submenu {
     margin-left: 15px;
-    margin-bottom: 24px;
     border-left: 1px solid #333; 
     padding-left: 15px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out, margin-bottom 0.3s ease-out;
+}
+
+/* 當子選單被加上 .open 樣式時才會展開 */
+.submenu.open {
+    max-height: 100px; 
+    margin-bottom: 24px;
 }
 
 .submenu-item {
@@ -131,7 +142,7 @@ h1 {
     line-height: 1.8;
     color: #888888;
     margin-bottom: 8px;
-    display: flex; /* 電腦版與手機版均維持左右排列 */
+    display: flex; 
 }
 
 /* 年份區塊固定寬度 */
@@ -145,9 +156,7 @@ h1 {
     flex-grow: 1;
 }
 
-/* ==========================================
-   📱 智慧型手機版排版修正 (當螢幕寬度小於 768px)
-   ========================================== */
+/* 📱 智慧型手機版排版修正 */
 @media (max-width: 768px) {
     body {
         flex-direction: column;
@@ -166,10 +175,6 @@ h1 {
         margin-bottom: 20px;
     }
 
-    .submenu {
-        margin-bottom: 10px;
-    }
-
     .main-content {
         margin-left: 0;
         width: 100%;
@@ -186,17 +191,15 @@ h1 {
         margin-bottom: 40px;
     }
 
-    /* 📱 關鍵修正：縮小手機版年份寬度，但維持 flex 排列 */
     .info-item {
         margin-bottom: 10px;
     }
 
     .info-year {
-        width: 55px; /* 縮小手機版的年份寬度（2026剛好放得下） */
+        width: 55px; 
         font-size: 13px;
     }
     
-    /* 為了應付像 2021~2026 這種較長的學歷年份，單獨讓學歷的年份寬度增加 */
     .resume-section:nth-of-type(1) .info-year {
         width: 85px;
     }
@@ -210,29 +213,27 @@ h1 {
 
 <body>
 
-<!-- 左側側邊欄導覽列 -->
 <nav class="sidebar">
     <h2>Pan Yu-Yang</h2>
-    <a href="about.html" class="menu-item active" style="font-weight: bold;">藝術家介紹</a>
-    <span class="menu-item">作品</span>
-    <div class="submenu">
+    <a href="about.html" class="menu-item" style="font-weight: bold; color: #ffffff;">介紹</a>
+    
+    <span class="menu-item" onclick="toggleArtMenu()">畫畫</span>
+    <div class="submenu" id="art-submenu">
         <a href="printmaking.html" class="submenu-item">版畫系列</a>
         <a href="pseudo-classic.html" class="submenu-item">擬古系列</a>
     </div>
-    <a href="writing.html" class="menu-item">書寫</a>
+    
+    <a href="writing.html" class="menu-item">寫作</a>
 </nav>
 
-<!-- 右側主要內容區 -->
 <main class="main-content">
 
-    <h1>藝術家介紹</h1>    
+    <h1>介紹</h1>    
 
-    <!-- 個人照區塊 -->
     <div class="profile-container">
         <img class="profile-img" src="個人照_彩色.jpg" alt="Pan Yu-Yang 個人照">
     </div>
 
-    <!-- 學歷 -->
     <section class="resume-section">
         <div class="section-title">學歷</div>
         <ul class="info-list">
@@ -243,20 +244,18 @@ h1 {
         </ul>
     </section>
 
-    <!-- 出版書籍 -->
     <section class="resume-section">
         <div class="section-title">出版書籍</div>
         <ul class="info-list">
             <li class="info-item"><span class="info-year">2026</span><span class="info-text">《壹圓》，台北市：個人出版。</span></li>
             <li class="info-item"><span class="info-year">2024</span><span class="info-text">《失眠斷片腹稿》第三集，台北市：個人出版。</span></li>
             <li class="info-item"><span class="info-year"></span><span class="info-text">《新竹藝術家叢書：謝鴻均》，新竹市：新竹市政府文化局。</span></li>
-            <li class="info-item"><span class="info-year">2023</span><span class="info-text">《失眠斷片腹稿》第二集，台北市：個人出版。</span></li>
+            <li class="info-item"><span class="info-year">2023</span><span class="info-text">《失眠斷片腹稿》第二集，台北市：個人出版.</span></li>
             <li class="info-item"><span class="info-year"></span><span class="info-text">《失眠斷片腹稿》第一集，台北市：個人出版。</span></li>
             <li class="info-item"><span class="info-year">2018</span><span class="info-text">《煩惱交換平台》（繪圖），台北市：臺北市政府教育局。</span></li>
         </ul>
     </section>
 
-    <!-- 得獎紀錄 -->
     <section class="resume-section">
         <div class="section-title">得獎紀錄</div>
         <ul class="info-list">
@@ -278,7 +277,6 @@ h1 {
         </ul>
     </section>
 
-    <!-- 展覽經歷 -->
     <section class="resume-section">
         <div class="section-title">展覽經歷</div>
         
@@ -318,7 +316,7 @@ h1 {
             <li class="info-item"><span class="info-year"></span><span class="info-text">清大藝設系期末共評優秀聯展，清華大學澤空間，新竹，臺灣。</span></li>
             <li class="info-item"><span class="info-year">2022</span><span class="info-text">希望的所在，典美藝文空間，臺北，臺灣。</span></li>
             <li class="info-item"><span class="info-year"></span><span class="info-text">春之清華，竹師藝術空間，新竹，臺灣。</span></li>
-            <li class="info-item"><span class="info-year">2021</span><span class="info-text">OMEGAVISION，師大附中新北樓地塹，臺北，臺灣.</span></li>
+            <li class="info-item"><span class="info-year">2021</span><span class="info-text">OMEGAVISION，師大附中新北樓地塹，臺北，臺灣。</span></li>
             <li class="info-item"><span class="info-year">2020</span><span class="info-text">入木三分熟，師大附中新北樓地塹，臺北，臺灣。</span></li>
             <li class="info-item"><span class="info-year"></span><span class="info-text">秋菊男孩俱樂部，師大附中新北樓地塹，臺北，臺灣。</span></li>
             <li class="info-item"><span class="info-year">2019</span><span class="info-text">半生不熟，師大附中新北樓地塹，臺北，臺灣。</span></li>
@@ -326,6 +324,14 @@ h1 {
     </section>
 
 </main>
+
+<script>
+// 控制「畫畫」選單展開收合的 Script
+function toggleArtMenu() {
+    var submenu = document.getElementById('art-submenu');
+    submenu.classList.toggle('open');
+}
+</script>
 
 </body>
 </html>
