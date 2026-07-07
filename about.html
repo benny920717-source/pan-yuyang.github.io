@@ -79,9 +79,21 @@ body {
 h1 {
     font-size: 24px;
     font-weight: normal;
-    margin-bottom: 60px;
+    margin-bottom: 40px; /* 稍微縮小，配合下方個人照的外觀 */
     letter-spacing: 2px;
     color: #ffffff;
+}
+
+/* 🔥 個人照樣式區 */
+.profile-container {
+    margin-bottom: 50px;
+}
+
+.profile-img {
+    width: 180px;         /* 控制小巧精緻的尺寸 */
+    height: auto;
+    border: 1px solid #252525;
+    display: block;
 }
 
 /* 履歷區塊樣式 */
@@ -103,7 +115,7 @@ h1 {
     font-size: 15px;
     font-weight: bold;
     color: #aaaaaa;
-    margin: 15px 0 10px 0;
+    margin: 25px 0 10px 0;
     letter-spacing: 1px;
 }
 
@@ -118,11 +130,11 @@ h1 {
     font-size: 14px;
     line-height: 1.8;
     color: #888888;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
     display: flex;
 }
 
-/* 讓年份寬度固定，排列更整齊 */
+/* 年份區塊固定寬度 */
 .info-year {
     width: 90px;
     flex-shrink: 0;
@@ -165,16 +177,23 @@ h1 {
     }
 
     h1 {
+        margin-bottom: 30px;
+    }
+
+    /* 手機上個人照置中 */
+    .profile-container {
+        display: flex;
+        justify-content: center;
         margin-bottom: 40px;
     }
 
     .info-item {
-        flex-direction: column; /* 手機上讓年份跟內容上下排列，避免擠壓 */
-        margin-bottom: 15px;
+        margin-bottom: 12px;
     }
 
-    .info-year {
-        margin-bottom: 2px;
+    /* 手機版若年份留白，則不顯示多餘的空白行 */
+    .info-year:empty {
+        display: none;
     }
 }
 </style>
@@ -182,6 +201,7 @@ h1 {
 
 <body>
 
+<!-- 左側側邊欄導覽列 -->
 <nav class="sidebar">
     <h2>Pan Yu-Yang</h2>
     <a href="about.html" class="menu-item active" style="font-weight: bold;">藝術家介紹</a>
@@ -193,10 +213,17 @@ h1 {
     <a href="writing.html" class="menu-item">書寫</a>
 </nav>
 
+<!-- 右側主要內容區 -->
 <main class="main-content">
 
     <h1>藝術家介紹</h1>    
 
+    <!-- 個人照區塊 -->
+    <div class="profile-container">
+        <img class="profile-img" src="個人照_彩色.jpg" alt="Pan Yu-Yang 個人照">
+    </div>
+
+    <!-- 學歷 -->
     <section class="resume-section">
         <div class="section-title">學歷</div>
         <ul class="info-list">
@@ -207,39 +234,42 @@ h1 {
         </ul>
     </section>
 
+    <!-- 出版書籍 -->
     <section class="resume-section">
         <div class="section-title">出版書籍</div>
         <ul class="info-list">
             <li class="info-item"><span class="info-year">2026</span><span class="info-text">《壹圓》，台北市：個人出版。</span></li>
             <li class="info-item"><span class="info-year">2024</span><span class="info-text">《失眠斷片腹稿》第三集，台北市：個人出版。</span></li>
-            <li class="info-item"><span class="info-year">2024</span><span class="info-text">《新竹藝術家叢書：謝鴻均》，新竹市：新竹市政府文化局。</span></li>
+            <li class="info-item"><span class="info-year"></span><span class="info-text">《新竹藝術家叢書：謝鴻均》，新竹市：新竹市政府文化局。</span></li>
             <li class="info-item"><span class="info-year">2023</span><span class="info-text">《失眠斷片腹稿》第二集，台北市：個人出版。</span></li>
-            <li class="info-item"><span class="info-year">2023</span><span class="info-text">《失眠斷片腹稿》第一集，台北市：個人出版。</span></li>
+            <li class="info-item"><span class="info-year"></span><span class="info-text">《失眠斷片腹稿}第一集，台北市：個人出版。</span></li>
             <li class="info-item"><span class="info-year">2018</span><span class="info-text">《煩惱交換平台》（繪圖），台北市：臺北市政府教育局。</span></li>
         </ul>
     </section>
 
+    <!-- 得獎紀錄 -->
     <section class="resume-section">
         <div class="section-title">得獎紀錄</div>
         <ul class="info-list">
             <li class="info-item"><span class="info-year">2025</span><span class="info-text">感謝狀，2025藝術新聲－藝術學系優秀畢業生推薦展，臺中，臺灣。</span></li>
-            <li class="info-item"><span class="info-year">2025</span><span class="info-text">國立清華大學學士班畢業學業表現優等獎，新竹，臺灣。</span></li>
+            <li class="info-item"><span class="info-year"></span><span class="info-text">國立清華大學學士班畢業學業表現優等獎，新竹，臺灣。</span></li>
             <li class="info-item"><span class="info-year">2024</span><span class="info-text">《上邪》，春之清華藝術卓越獎，創作類，銅獎，新竹，臺灣。</span></li>
-            <li class="info-item"><span class="info-year">2024</span><span class="info-text">112學年度第二學期專業科目審查成績優秀獎，清華大學藝術與設計學系創作組，新竹，臺灣。</span></li>
+            <li class="info-item"><span class="info-year"></span><span class="info-text">112學年度第二學期專業科目審查成績優秀獎，清華大學藝術與設計學系創作組，新竹，臺灣。</span></li>
             <li class="info-item"><span class="info-year">2023</span><span class="info-text">感謝狀，清華大學學生會行政中心新聞專案小組清檸，新竹，臺灣。</span></li>
-            <li class="info-item"><span class="info-year">2023</span><span class="info-text">《失控的進步》，春之清華藝術卓越獎，創作類，佳作，新竹，臺灣。</span></li>
-            <li class="info-item"><span class="info-year">2023</span><span class="info-text">《壹元》，第35屆信誼幼兒文學獎，圖畫書文字創作獎，入選，臺北，臺灣。</span></li>
-            <li class="info-item"><span class="info-year">2023</span><span class="info-text">《天邊一朵雲》，新竹美展，西方媒材類，佳作，新竹，臺灣。</span></li>
-            <li class="info-item"><span class="info-year">2023</span><span class="info-text">書卷獎，清華大學人文社會學院中國文學系，新竹，臺灣。</span></li>
-            <li class="info-item"><span class="info-year">2023</span><span class="info-text">111學年度第二學期專業科目審查成績優秀獎，清華大學藝術與設計學系創作組，新竹，臺灣。</span></li>
+            <li class="info-item"><span class="info-year"></span><span class="info-text">《失控的進步》，春之清華藝術卓越獎，創作類，佳作，新竹，臺灣。</span></li>
+            <li class="info-item"><span class="info-year"></span><span class="info-text">《壹元》，第35屆信誼幼兒文學獎，圖畫書文字創作獎，入選，臺北，臺灣。</span></li>
+            <li class="info-item"><span class="info-year"></span><span class="info-text">《天邊一朵雲》，新竹美展，西方媒材類，佳作，新竹，臺灣。</span></li>
+            <li class="info-item"><span class="info-year"></span><span class="info-text">書卷獎，清華大學人文社會學院中國文學系，新竹，臺灣。</span></li>
+            <li class="info-item"><span class="info-year"></span><span class="info-text">111學年度第二學期專業科目審查成績優秀獎，清華大學藝術與設計學系創作組，新竹，臺灣。</span></li>
             <li class="info-item"><span class="info-year">2022</span><span class="info-text">《焉知非福？》，紙上躍躍然・典美插畫大賞，入選，臺北，臺灣。</span></li>
-            <li class="info-item"><span class="info-year">2022</span><span class="info-text">《姐妹花》，春之清華藝術卓越獎，創作類，優選，新竹，臺灣。</span></li>
-            <li class="info-item"><span class="info-year">2022</span><span class="info-text">書卷獎，清華大學清華學院學士班，新竹，臺灣。</span></li>
+            <li class="info-item"><span class="info-year"></span><span class="info-text">《姐妹花》，春之清華藝術卓越獎，創作類，優選，新竹，臺灣。</span></li>
+            <li class="info-item"><span class="info-year"></span><span class="info-text">書卷獎，清華大學清華學院學士班，新竹，臺灣。</span></li>
             <li class="info-item"><span class="info-year">2020</span><span class="info-text">《阿嬤是偉大的田莊人》，108學年度全國學生美術比賽，高中職美術科組漫畫類，特優，臺灣。</span></li>
             <li class="info-item"><span class="info-year">2019</span><span class="info-text">《阿公的發財車》，107學年度全國學生美術比賽，高中職美術科組漫畫類，特優，臺灣。</span></li>
         </ul>
     </section>
 
+    <!-- 展覽經歷 -->
     <section class="resume-section">
         <div class="section-title">展覽經歷</div>
         
@@ -249,39 +279,39 @@ h1 {
             <li class="info-item"><span class="info-year">2024</span><span class="info-text">失眠斷片腹稿，清華大學澤空間，新竹，臺灣。</span></li>
         </ul>
 
-        <div class="sub-section-title" style="margin-top: 30px;">聯展</div>
+        <div class="sub-section-title">聯展</div>
         <ul class="info-list">
             <li class="info-item"><span class="info-year">2026</span><span class="info-text">少年行：折若木以拂日兮，Bluerider ART，臺北，臺灣。</span></li>
-            <li class="info-item"><span class="info-year">2026</span><span class="info-text">zine・zip，承風書店，高雄，臺灣。</span></li>
-            <li class="info-item"><span class="info-year">2026</span><span class="info-text">臺北國際書展，世貿一館，臺北，臺灣。</span></li>
+            <li class="info-item"><span class="info-year"></span><span class="info-text">zine・zip，承風書店，高雄，臺灣。</span></li>
+            <li class="info-item"><span class="info-year"></span><span class="info-text">臺北國際書展，世貿一館，臺北，臺灣。</span></li>
             <li class="info-item"><span class="info-year">2025</span><span class="info-text">南漫節獨漫祭，西竹圍之丘文創園區浮生圖像所，臺南，臺灣。</span></li>
-            <li class="info-item"><span class="info-year">2025</span><span class="info-text">高雄漾藝術博覽會，駁二藝術特區大勇區P3倉庫，高雄，台灣。</span></li>
-            <li class="info-item"><span class="info-year">2025</span><span class="info-text">春之清華，竹師藝術空間，新竹，臺灣。</span></li>
-            <li class="info-item"><span class="info-year">2025</span><span class="info-text">臺南藝術印刷品市集，吳園公會堂，臺南，臺灣。</span></li>
-            <li class="info-item"><span class="info-year">2025</span><span class="info-text">臺中藝術博覽會，日月千禧酒店，臺中，臺灣。</span></li>
-            <li class="info-item"><span class="info-year">2025</span><span class="info-text">青春嶺聯展，科元藝術，臺中，臺灣。</span></li>
-            <li class="info-item"><span class="info-year">2025</span><span class="info-text">MEWE島，竹師藝術空間、竹師藝術空間二館，新竹，臺灣。</span></li>
-            <li class="info-item"><span class="info-year">2025</span><span class="info-text">大阪藝術書展，Seaside Studio CASO，大阪，日本。</span></li>
-            <li class="info-item"><span class="info-year">2025</span><span class="info-text">藝術新聲，大墩藝廊，臺中，臺灣。</span></li>
-            <li class="info-item"><span class="info-year">2025</span><span class="info-text">ME WE EW，Woolloomooloo Xhibit，臺北，臺灣。</span></li>
-            <li class="info-item"><span class="info-year">2025</span><span class="info-text">當代藝術中的生活與情境，清華大學澤空間，新竹，臺灣。</span></li>
-            <li class="info-item"><span class="info-year">2025</span><span class="info-text">臺北國際書展，世貿一館，臺北，臺灣。</span></li>
+            <li class="info-item"><span class="info-year"></span><span class="info-text">高雄漾藝術博覽會，駁二藝術特區大勇區P3倉庫，高雄，台灣。</span></li>
+            <li class="info-item"><span class="info-year"></span><span class="info-text">春之清華，竹師藝術空間，新竹，臺灣。</span></li>
+            <li class="info-item"><span class="info-year"></span><span class="info-text">臺南藝術印刷品市集，吳園公會堂，臺南，臺灣。</span></li>
+            <li class="info-item"><span class="info-year"></span><span class="info-text">臺中藝術博覽會，日月千禧酒店，臺中，臺灣。</span></li>
+            <li class="info-item"><span class="info-year"></span><span class="info-text">青春嶺聯展，科元藝術，臺中，臺灣。</span></li>
+            <li class="info-item"><span class="info-year"></span><span class="info-text">MEWE島，竹師藝術空間、竹師藝術空間二館，新竹，臺灣。</span></li>
+            <li class="info-item"><span class="info-year"></span><span class="info-text">大阪藝術書展，Seaside Studio CASO，大阪，日本。</span></li>
+            <li class="info-item"><span class="info-year"></span><span class="info-text">藝術新聲，大墩藝廊，臺中，臺灣。</span></li>
+            <li class="info-item"><span class="info-year"></span><span class="info-text">ME WE EW，Woolloomooloo Xhibit，臺北，臺灣。</span></li>
+            <li class="info-item"><span class="info-year"></span><span class="info-text">當代藝術中的生活與情境，清華大學澤空間，新竹，臺灣。</span></li>
+            <li class="info-item"><span class="info-year"></span><span class="info-text">臺北國際書展，世貿一館，臺北，臺灣。</span></li>
             <li class="info-item"><span class="info-year">2024</span><span class="info-text">臺中藝術書展，R04願景館，臺中，臺灣。</span></li>
-            <li class="info-item"><span class="info-year">2024</span><span class="info-text">春之清華，竹師藝術空間，新竹，臺灣。</span></li>
-            <li class="info-item"><span class="info-year">2024</span><span class="info-text">放牧瀏覽小誌徵件展，毛刺空間，臺中，臺灣。</span></li>
-            <li class="info-item"><span class="info-year">2024</span><span class="info-text">臺北國際書展，世貿一館，臺北，臺灣。</span></li>
-            <li class="info-item"><span class="info-year">2024</span><span class="info-text">曼谷藝術博覽會，corner house，曼谷，泰國。</span></li>
-            <li class="info-item"><span class="info-year">2024</span><span class="info-text">清大藝設系期末共評優秀聯展，清華大學澤空間，新竹，臺灣。</span></li>
+            <li class="info-item"><span class="info-year"></span><span class="info-text">春之清華，竹師藝術空間，新竹，臺灣。</span></li>
+            <li class="info-item"><span class="info-year"></span><span class="info-text">放牧瀏覽小誌徵件展，毛刺空間，臺中，臺灣。</span></li>
+            <li class="info-item"><span class="info-year"></span><span class="info-text">臺北國際書展，世貿一館，臺北，臺灣。</span></li>
+            <li class="info-item"><span class="info-year"></span><span class="info-text">曼谷藝術博覽會，corner house，曼谷，泰國。</span></li>
+            <li class="info-item"><span class="info-year"></span><span class="info-text">清大藝設系期末共評優秀聯展，清華大學澤空間，新竹，臺灣。</span></li>
             <li class="info-item"><span class="info-year">2023</span><span class="info-text">傻瓜書日，臺灣當代文化實驗場圖書館展演空間，臺北，臺灣。</span></li>
-            <li class="info-item"><span class="info-year">2023</span><span class="info-text">漫類集會，西竹圍之丘文創園區浮生圖像所，臺南，臺灣。</span></li>
-            <li class="info-item"><span class="info-year">2023</span><span class="info-text">春之清華，竹師藝術空間，新竹，臺灣.</span></li>
-            <li class="info-item"><span class="info-year">2023</span><span class="info-text">新竹美展，新竹縣政府文化局美術館，新竹，臺灣。</span></li>
-            <li class="info-item"><span class="info-year">2023</span><span class="info-text">清大藝設系期末共評優秀聯展，清華大學澤空間，新竹，臺灣。</span></li>
+            <li class="info-item"><span class="info-year"></span><span class="info-text">漫類集會，西竹圍之丘文創園區浮生圖像所，臺南，臺灣。</span></li>
+            <li class="info-item"><span class="info-year"></span><span class="info-text">春之清華，竹師藝術空間，新竹，臺灣。</span></li>
+            <li class="info-item"><span class="info-year"></span><span class="info-text">新竹美展，新竹縣政府文化局美術館，新竹，臺灣。</span></li>
+            <li class="info-item"><span class="info-year"></span><span class="info-text">清大藝設系期末共評優秀聯展，清華大學澤空間，新竹，臺灣。</span></li>
             <li class="info-item"><span class="info-year">2022</span><span class="info-text">希望的所在，典美藝文空間，臺北，臺灣。</span></li>
-            <li class="info-item"><span class="info-year">2022</span><span class="info-text">春之清華，竹師藝術空間，新竹，臺灣。</span></li>
+            <li class="info-item"><span class="info-year"></span><span class="info-text">春之清華，竹師藝術空間，新竹，臺灣。</span></li>
             <li class="info-item"><span class="info-year">2021</span><span class="info-text">OMEGAVISION，師大附中新北樓地塹，臺北，臺灣。</span></li>
             <li class="info-item"><span class="info-year">2020</span><span class="info-text">入木三分熟，師大附中新北樓地塹，臺北，臺灣。</span></li>
-            <li class="info-item"><span class="info-year">2020</span><span class="info-text">秋菊男孩俱樂部，師大附中新北樓地塹，臺北，臺灣。</span></li>
+            <li class="info-item"><span class="info-year"></span><span class="info-text">秋菊男孩俱樂部，師大附中新北樓地塹，臺北，臺灣。</span></li>
             <li class="info-item"><span class="info-year">2019</span><span class="info-text">半生不熟，師大附中新北樓地塹，臺北，臺灣。</span></li>
         </ul>
     </section>
