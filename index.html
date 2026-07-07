@@ -7,21 +7,30 @@
 
 <style>
 
+/* 1. 全域背景與文字顏色修改：黑底白字 */
 body{
     font-family: Helvetica, Arial, sans-serif;
     margin:80px auto;
     max-width:900px;
     padding:0 30px;
+    background-color: #000000; /* 改為純黑背景 */
+    color: #ffffff;            /* 改為純白文字 */
 }
 
 .menu{
     margin-bottom:40px;
 }
 
+/* 2. 導覽列連結改為白色 */
 .menu a{
     margin-right:20px;
     text-decoration:none;
-    color:black;
+    color: #ffffff;            /* 改為白色連結 */
+}
+
+/* 滑鼠移到連結上時的微亮效果 */
+.menu a:hover{
+    color: #cccccc;
 }
 
 h1{
@@ -46,16 +55,18 @@ img{
     margin-bottom:15px;
 }
 
+/* 3. 作品資訊：改為較亮的淺灰色，提升在黑底上的可讀性 */
 .work-info{
     font-size:14px;
-    color:#777;
+    color: #aaaaaa;            /* 從 #777 調亮為 #aaa */
     margin-bottom:15px;
 }
 
+/* 4. 作品說明內文：改為柔和的淺灰白，長時間閱讀更舒服 */
 .work-text{
     font-size:16px;
     line-height:1.8;
-    color:#444;
+    color: #e0e0e0;            /* 從 #444 調亮為 #e0e0e0 */
 }
 
 </style>
@@ -170,8 +181,6 @@ img{
         這些書雖然是讓步履艱辛的阻力，
         卻也是支持我走下去的能量。
     </div>
-
-</div>
 
 </div>
 
