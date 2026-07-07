@@ -79,18 +79,18 @@ body {
 h1 {
     font-size: 24px;
     font-weight: normal;
-    margin-bottom: 40px; /* 稍微縮小，配合下方個人照的外觀 */
+    margin-bottom: 40px;
     letter-spacing: 2px;
     color: #ffffff;
 }
 
-/* 🔥 個人照樣式區 */
+/* 個人照樣式區 */
 .profile-container {
     margin-bottom: 50px;
 }
 
 .profile-img {
-    width: 180px;         /* 控制小巧精緻的尺寸 */
+    width: 180px;         
     height: auto;
     border: 1px solid #252525;
     display: block;
@@ -131,7 +131,7 @@ h1 {
     line-height: 1.8;
     color: #888888;
     margin-bottom: 8px;
-    display: flex;
+    display: flex; /* 電腦版與手機版均維持左右排列 */
 }
 
 /* 年份區塊固定寬度 */
@@ -180,20 +180,29 @@ h1 {
         margin-bottom: 30px;
     }
 
-    /* 手機上個人照置中 */
     .profile-container {
         display: flex;
         justify-content: center;
         margin-bottom: 40px;
     }
 
+    /* 📱 關鍵修正：縮小手機版年份寬度，但維持 flex 排列 */
     .info-item {
-        margin-bottom: 12px;
+        margin-bottom: 10px;
     }
 
-    /* 手機版若年份留白，則不顯示多餘的空白行 */
-    .info-year:empty {
-        display: none;
+    .info-year {
+        width: 55px; /* 縮小手機版的年份寬度（2026剛好放得下） */
+        font-size: 13px;
+    }
+    
+    /* 為了應付像 2021~2026 這種較長的學歷年份，單獨讓學歷的年份寬度增加 */
+    .resume-section:nth-of-type(1) .info-year {
+        width: 85px;
+    }
+
+    .info-text {
+        font-size: 13px;
     }
 }
 </style>
@@ -242,7 +251,7 @@ h1 {
             <li class="info-item"><span class="info-year">2024</span><span class="info-text">《失眠斷片腹稿》第三集，台北市：個人出版。</span></li>
             <li class="info-item"><span class="info-year"></span><span class="info-text">《新竹藝術家叢書：謝鴻均》，新竹市：新竹市政府文化局。</span></li>
             <li class="info-item"><span class="info-year">2023</span><span class="info-text">《失眠斷片腹稿》第二集，台北市：個人出版。</span></li>
-            <li class="info-item"><span class="info-year"></span><span class="info-text">《失眠斷片腹稿}第一集，台北市：個人出版。</span></li>
+            <li class="info-item"><span class="info-year"></span><span class="info-text">《失眠斷片腹稿》第一集，台北市：個人出版。</span></li>
             <li class="info-item"><span class="info-year">2018</span><span class="info-text">《煩惱交換平台》（繪圖），台北市：臺北市政府教育局。</span></li>
         </ul>
     </section>
@@ -309,7 +318,7 @@ h1 {
             <li class="info-item"><span class="info-year"></span><span class="info-text">清大藝設系期末共評優秀聯展，清華大學澤空間，新竹，臺灣。</span></li>
             <li class="info-item"><span class="info-year">2022</span><span class="info-text">希望的所在，典美藝文空間，臺北，臺灣。</span></li>
             <li class="info-item"><span class="info-year"></span><span class="info-text">春之清華，竹師藝術空間，新竹，臺灣。</span></li>
-            <li class="info-item"><span class="info-year">2021</span><span class="info-text">OMEGAVISION，師大附中新北樓地塹，臺北，臺灣。</span></li>
+            <li class="info-item"><span class="info-year">2021</span><span class="info-text">OMEGAVISION，師大附中新北樓地塹，臺北，臺灣.</span></li>
             <li class="info-item"><span class="info-year">2020</span><span class="info-text">入木三分熟，師大附中新北樓地塹，臺北，臺灣。</span></li>
             <li class="info-item"><span class="info-year"></span><span class="info-text">秋菊男孩俱樂部，師大附中新北樓地塹，臺北，臺灣。</span></li>
             <li class="info-item"><span class="info-year">2019</span><span class="info-text">半生不熟，師大附中新北樓地塹，臺北，臺灣。</span></li>
