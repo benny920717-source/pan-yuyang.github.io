@@ -16,7 +16,7 @@ body {
     min-height: 100vh;
 }
 
-/* 左側側邊欄維持一致 */
+/* 左側側邊欄固定寬度與樣式 */
 .sidebar {
     width: 260px;
     padding: 60px 40px;
@@ -66,12 +66,12 @@ body {
     pointer-events: none;
 }
 
-/* 右側主要內容區：嚴格控制作品的垂直排列 */
+/* 右側主要內容區：嚴格控制單一欄垂直排列 */
 .main-content {
     margin-left: 260px; 
     padding: 60px 80px;
-    max-width: 800px; /* 限制寬度，讓長幅作品在螢幕上大小適中 */
-    width: 100%;
+    max-width: 800px; 
+    width: calc(100% - 260px);
     box-sizing: border-box;
 }
 
@@ -83,11 +83,11 @@ h1 {
     color: #ffffff;
 }
 
-/* 獨立的作品外殼，確保圖文垂直堆疊且互不干擾 */
+/* 獨立的作品外殼：強制單一欄由上至下垂直排，寬度拿滿 */
 .work-card {
-    display: flex;
-    flex-direction: column; /* 確保內容由上至下垂直排列 */
-    margin-bottom: 80px;   /* 作品與作品之間的舒適間距 */
+    display: block;
+    width: 100%;
+    margin-bottom: 80px;   
 }
 
 .work-title {
@@ -116,11 +116,12 @@ h1 {
     letter-spacing: 1px;
 }
 
+/* 作品說明與印章文字統一格式 */
 .work-text {
     font-size: 15px;
     line-height: 1.8;
     color: #cccccc;            
-    white-space: pre-line; /* 保留故事原本的換行 */
+    white-space: pre-line; 
 }
 </style>
 </head>
@@ -144,7 +145,7 @@ h1 {
 
     <h1>作品 / 擬古系列</h1>    
 
-    <!-- 作品 1：長尾山娘巴蕊圖（補回） -->
+    <!-- 作品 1：長尾山娘巴蕊圖 -->
     <div class="work-card">
         <div class="work-title">長尾山娘巴蕊圖</div>
         <div class="work-img-wrapper">
@@ -155,7 +156,9 @@ h1 {
         牠們是臺灣特有種鳥類，
         會為了護巢而攻擊人類。
         這張畫在描繪人們被台灣藍鵲「巴頭」，
-        雖然感到很痛，可是又覺得很榮幸的矛盾心緒。</div>
+        雖然感到很痛，可是又覺得很榮幸的矛盾心緒。
+
+        印章文字：當頭上拂過藍的殘影／伴隨拔髮般的刺痛／他嚇得縮起脖子、吐出髒字／直到他發現葉叢間有一條黑白分明的尾羽／才知道這是傳說中的台灣藍鵲空襲／之後提起這件事／他總會說：討厭啦。</div>
     </div>
 
     <!-- 作品 2：牧書圖 -->
@@ -202,7 +205,7 @@ h1 {
         思考人類面對敵人的時候真的能具備足夠的智慧與耐心嗎？</div>
     </div>
 
-    <!-- 作品 5：在路上（補回） -->
+    <!-- 作品 5：在路上 -->
     <div class="work-card">
         <div class="work-title">在路上</div>
         <div class="work-img-wrapper">
@@ -215,159 +218,6 @@ h1 {
         但我喜歡把那個沈重感幻想成某種知識的質量。
         這些書雖然是讓步履艱辛的阻力，
         卻也是支持我走下去的能量。</div>
-    </div>
-
-</main>
-
-</body>
-</html>    display: block;
-    text-decoration: none;
-    color: #ffffff;
-    font-size: 16px;
-    margin-bottom: 24px;
-}
-
-.menu-item:hover, .submenu-item:hover {
-    color: #aaaaaa;
-}
-
-.submenu {
-    margin-left: 15px;
-    margin-bottom: 24px;
-    border-left: 1px solid #333; 
-    padding-left: 15px;
-}
-
-.submenu-item {
-    display: block;
-    text-decoration: none;
-    color: #888888; 
-    font-size: 14px;
-    margin-bottom: 12px;
-}
-
-/* 讓使用者知道目前停留在「擬古系列」 */
-.submenu-item.active {
-    color: #ffffff;
-    font-weight: bold;
-    pointer-events: none;
-}
-
-/* 右側主要內容區：嚴格控制作品的垂直排列 */
-.main-content {
-    margin-left: 260px; 
-    padding: 60px 80px;
-    max-width: 800px; /* 限制寬度，讓長幅作品在螢幕上大小適中 */
-    width: 100%;
-    box-sizing: border-box;
-}
-
-h1 {
-    font-size: 24px;
-    font-weight: normal;
-    margin-bottom: 60px;
-    letter-spacing: 2px;
-    color: #ffffff;
-}
-
-/* 獨立的作品外殼，確保圖文垂直堆疊且互不干擾 */
-.work-card {
-    display: flex;
-    flex-direction: column; /* 確保內容由上至下垂直排列 */
-    margin-bottom: 80px;   /* 作品與作品之間的舒適間距 */
-}
-
-.work-title {
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 15px;
-    letter-spacing: 1px;
-}
-
-.work-img-wrapper {
-    width: 100%;
-    margin-bottom: 20px;
-}
-
-.work-img-wrapper img {
-    width: 100%;
-    max-width: 100%;
-    display: block;
-    height: auto;
-}
-
-.work-info {
-    font-size: 13px;
-    color: #888888;            
-    margin-bottom: 15px;
-    letter-spacing: 1px;
-}
-
-.work-text {
-    font-size: 15px;
-    line-height: 1.8;
-    color: #cccccc;            
-    white-space: pre-line; /* 保留你故事原本的換行 */
-}
-</style>
-</head>
-
-<body>
-
-<nav class="sidebar">
-    <h2>Pan Yu-Yang</h2>
-    <a href="about.html" class="menu-item">藝術家介紹</a>
-    <span class="menu-item" style="font-weight: bold;">作品</span>
-    <div class="submenu">
-        <a href="printmaking.html" class="submenu-item">版畫系列</a>
-        <a href="pseudo-classic.html" class="submenu-item active">擬古系列</a>
-    </div>
-    <a href="writing.html" class="menu-item">書寫</a>
-</nav>
-
-<main class="main-content">
-
-    <h1>作品 / 擬古系列</h1>    
-
-    <div class="work-card">
-        <div class="work-title">牧書圖</div>
-        <div class="work-img-wrapper">
-            <img src="牧書圖_全貌.jpg">
-        </div>
-        <div class="work-info">2024｜原子筆、牛皮紙｜20 × 40 cm</div>
-        <div class="work-text">畫作的靈感來自成語「牛角掛書」，
-        呈現書本掛在牛角上、一邊遊走一邊閱讀的自在氛圍。
-        構圖向臺灣前輩藝術家黃土水的淺浮雕作品《水牛群像》致敬，
-        形式模仿傳統水墨畫卷，
-        並以印章文字作為述說故事的載體。</div>
-    </div>
-        
-    <div class="work-card">
-        <div class="work-title">七仙女圖</div>
-        <div class="work-img-wrapper">
-            <img src="七仙女圖_全貌.jpg">
-        </div>
-        <div class="work-info">2024｜原子筆、牛皮紙｜35 × 54 cm</div>
-        <div class="work-text">小時候，
-        每次過年回到阿公阿嬤家，
-        總可以和姐姐、堂姐、表姐一起聊天吃飯玩樂；
-        但是隨著姐姐們長大、工作、結婚，
-        過年的氣氛不再那麼熱鬧。
-        因此我畫了一張七仙女圖，
-        紀念之前這段美好的時光。</div>
-    </div>
-
-    <div class="work-card">
-        <div class="work-title">七擒七縱圖</div>
-        <div class="work-img-wrapper">
-            <img src="七擒七縱圖_全貌.jpg">
-        </div>
-        <div class="work-info">2024｜原子筆、牛皮紙｜35 × 54 cm</div>
-        <div class="work-text">「七擒七縱」出自《三國志》，
-        描述諸葛亮七次生擒、釋放南夷酋長孟獲，
-        直到其心悅誠服，不再生背叛之心。
-        這張畫作嘗試將古代的歷史故事移至當代的情境中，
-        思考人類面對敵人的時候真的能具備足夠的智慧與耐心嗎？</div>
     </div>
 
 </main>
