@@ -250,20 +250,20 @@ h1 {
 
 <nav class="sidebar">
     <h2>Pan Yu-Yang</h2>
-    <a href="about.html" class="menu-item">介紹</a>
+    <a href="about.html" class="menu-item">走過</a>
     
-    <span class="menu-item" onclick="toggleArtMenu()">畫畫</span>
+    <span class="menu-item" onclick="toggleArtMenu()">畫過</span>
     <div class="submenu open" id="art-submenu">
         <a href="printmaking.html" class="submenu-item">版畫系列</a>
         <a href="pseudo-classic.html" class="submenu-item active">擬古系列</a>
     </div>
     
-    <a href="writing.html" class="menu-item">寫作</a>
+    <a href="writing.html" class="menu-item">寫過</a>
 </nav>
 
 <main class="main-content">
 
-    <h1>畫畫 / 擬古系列</h1>    
+    <h1>畫過 / 擬古系列</h1>    
 
     <div class="work-card">
         <div class="work-img-wrapper">
@@ -419,7 +419,7 @@ function switchImage(mainImgId, thumbElement) {
     thumbElement.classList.add('active');
 }
 
-// 控制左側「畫畫」選單收合
+// 控制左側「畫過」選單收合
 function toggleArtMenu() {
     var submenu = document.getElementById('art-submenu');
     submenu.classList.toggle('open');
