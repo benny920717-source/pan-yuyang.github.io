@@ -265,6 +265,7 @@ h1 {
 
     <h1>畫畫 / 擬古系列</h1>    
 
+    <!-- 作品 1：長尾山娘巴蕊圖 -->
     <div class="work-card">
         <div class="work-img-wrapper">
             <img id="main-img-1" src="長尾山娘巴蕊圖_全貌.jpg">
@@ -288,9 +289,10 @@ h1 {
         </div>
     </div>
 
+    <!-- 作品 2：牧書圖 -->
     <div class="work-card">
         <div class="work-img-wrapper">
-            <img src="牧書圖_全貌.jpg">
+            <img id="main-img-2" src="牧書圖_全貌.jpg">
         </div>
         <div class="toggle-trigger" onclick="toggleDetails(this)">牧書圖｜2024｜原子筆、牛皮紙｜20 × 40 cm (點擊觀看介紹)</div>
         <div class="toggle-content">
@@ -301,17 +303,18 @@ h1 {
         </div>
         
         <div class="thumb-container">
-            <img class="thumb-img active" src="牧書圖_全貌.jpg" onclick="switchImage('main-img-1', this)">
-            <img class="thumb-img" src="牧書圖_局部1.jpg" onclick="switchImage('main-img-1', this)">
-            <img class="thumb-img" src="牧書圖_局部2.jpg" onclick="switchImage('main-img-1', this)">
-            <img class="thumb-img" src="牧書圖_局部3.jpg" onclick="switchImage('main-img-1', this)">
-            <img class="thumb-img" src="牧書圖_局部4.jpg" onclick="switchImage('main-img-1', this)">
+            <img class="thumb-img active" src="牧書圖_全貌.jpg" onclick="switchImage('main-img-2', this)">
+            <img class="thumb-img" src="牧書圖_局部1.jpg" onclick="switchImage('main-img-2', this)">
+            <img class="thumb-img" src="牧書圖_局部2.jpg" onclick="switchImage('main-img-2', this)">
+            <img class="thumb-img" src="牧書圖_局部3.jpg" onclick="switchImage('main-img-2', this)">
+            <img class="thumb-img" src="牧書圖_局部4.jpg" onclick="switchImage('main-img-2', this)">
         </div>
     </div>
 
+    <!-- 作品 3：七仙女圖 -->
     <div class="work-card">
         <div class="work-img-wrapper">
-            <img src="七仙女圖_全貌.jpg">
+            <img id="main-img-3" src="七仙女圖_全貌.jpg">
         </div>
         <div class="toggle-trigger" onclick="toggleDetails(this)">七仙女圖｜2024｜原子筆、牛皮紙｜35 × 54 cm (點擊觀看介紹)</div>
         <div class="toggle-content">
@@ -320,11 +323,20 @@ h1 {
                 <div class="work-seal">印章文字：我有一個姐姐、兩個表姐、四個堂姐／家人稱之為七仙女／她們從領紅包變成包紅包的人／在婚禮與喪禮短暫相聚</div>
             </div>
         </div>
+
+        <div class="thumb-container">
+            <img class="thumb-img active" src="七仙女圖_全貌.jpg" onclick="switchImage('main-img-3', this)">
+            <img class="thumb-img" src="七仙女圖_局部1.jpg" onclick="switchImage('main-img-3', this)">
+            <img class="thumb-img" src="七仙女圖_局部2.jpg" onclick="switchImage('main-img-3', this)">
+            <img class="thumb-img" src="七仙女圖_局部3.jpg" onclick="switchImage('main-img-3', this)">
+            <img class="thumb-img" src="七仙女圖_局部4.jpg" onclick="switchImage('main-img-3', this)">
+        </div>
     </div>
 
+    <!-- 作品 4：七擒七縱圖 -->
     <div class="work-card">
         <div class="work-img-wrapper">
-            <img src="七擒七縱圖_全貌.jpg">
+            <img id="main-img-4" src="七擒七縱圖_全貌.jpg">
         </div>
         <div class="toggle-trigger" onclick="toggleDetails(this)">七擒七縱圖｜2024｜原子筆、牛皮紙｜35 × 54 cm (點擊觀看介紹)</div>
         <div class="toggle-content">
@@ -335,9 +347,10 @@ h1 {
         </div>
     </div>
 
+    <!-- 作品 5：在路上 -->
     <div class="work-card">
         <div class="work-img-wrapper">
-            <img src="在路上_全貌.jpg">
+            <img id="main-img-5" src="在路上_全貌.jpg">
         </div>
         <div class="toggle-trigger" onclick="toggleDetails(this)">在路上｜2024｜原子筆、牛皮紙｜20 × 40 cm (點擊觀看介紹)</div>
         <div class="toggle-content">
@@ -374,7 +387,7 @@ function switchImage(mainImgId, thumbElement) {
     thumbElement.classList.add('active');
 }
 
-// 🎨 新增：控制左側「畫畫」選單收合
+// 控制左側「畫畫」選單收合
 function toggleArtMenu() {
     var submenu = document.getElementById('art-submenu');
     submenu.classList.toggle('open');
