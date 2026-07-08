@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>介紹 - Pan Yu-Yang</title>
+<title>走過 - Pan Yu-Yang</title>
 
 <style>
 body {
@@ -49,7 +49,7 @@ body {
     color: #f0f5f1; /* 🎨 滑鼠滑過選單時，呈現舒適的淡淡米白 */
 }
 
-/* 當前頁面（介紹）的高亮樣式 */
+/* 當前頁面（走過）的高亮樣式 */
 .menu-item.active {
     color: #ffffff;
     font-weight: bold;
@@ -224,20 +224,20 @@ h1 {
 
 <nav class="sidebar">
     <h2>Pan Yu-Yang</h2>
-    <a href="about.html" class="menu-item active">介紹</a>
+    <a href="about.html" class="menu-item active">走過</a>
     
-    <span class="menu-item" onclick="toggleArtMenu()">畫畫</span>
+    <span class="menu-item" onclick="toggleArtMenu()">畫過</span>
     <div class="submenu" id="art-submenu">
         <a href="printmaking.html" class="submenu-item">版畫系列</a>
         <a href="pseudo-classic.html" class="submenu-item">擬古系列</a>
     </div>
     
-    <a href="writing.html" class="menu-item">寫作</a>
+    <a href="writing.html" class="menu-item">寫過</a>
 </nav>
 
 <main class="main-content">
 
-    <h1>介紹</h1>    
+    <h1>走過</h1>    
 
     <div class="profile-container">
         <img class="profile-img" src="個人照_彩色.jpg" alt="Pan Yu-Yang 個人照">
@@ -335,7 +335,7 @@ h1 {
 </main>
 
 <script>
-// 控制「畫畫」選單展開收合的 Script
+// 控制「畫過」選單展開收合的 Script
 function toggleArtMenu() {
     var submenu = document.getElementById('art-submenu');
     submenu.classList.toggle('open');
