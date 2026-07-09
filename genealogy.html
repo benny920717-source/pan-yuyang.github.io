@@ -13,7 +13,7 @@ body {
     font-family: Helvetica, Arial, sans-serif; margin: 0; padding: 0; background-color: #268785; color: #ffffff; min-height: 100vh; overflow-x: hidden;
 }
 
-/* 頂部導覽列：與「走過」介面位置同步 */
+/* 頂部導覽列 */
 .top-navbar { 
     position: fixed; top: 0; left: 0; width: 100%; padding: 30px 40px; box-sizing: border-box; 
     display: flex; justify-content: space-between; align-items: center; z-index: 100; 
@@ -37,7 +37,6 @@ body {
     color: #268785; font-size: 18px; padding: 12px 0 12px 0; text-decoration: none;
     width: 100%; margin-bottom: 5px; transition: opacity 0.2s;
 }
-.home-icon-btn:hover { opacity: 0.7; }
 
 .menu-item { display: block; text-decoration: none; color: #268785; font-size: 15px; padding: 10px 0; cursor: pointer; letter-spacing: 3px; }
 .submenu { max-height: 0; overflow: hidden; display: flex; flex-direction: column; gap: 12px; padding-left: 10px; margin-left: 2px; border-left: 1px solid rgba(38, 135, 133, 0.3); transition: max-height 0.3s ease-in-out; }
@@ -47,7 +46,9 @@ body {
 
 /* 內容區 */
 .main-content { margin: 0 auto; padding: 120px 40px 60px 40px; max-width: 900px; }
-h1 { font-size: 24px; text-align: center; margin-bottom: 60px; letter-spacing: 2px; color: #ffffff; }
+
+/* 標題設定：已加入 font-weight: normal 取消粗體 */
+h1 { font-size: 24px; text-align: center; margin-bottom: 60px; letter-spacing: 2px; color: #ffffff; font-weight: normal; }
 
 .work-card { margin-bottom: 140px; }
 .work-img-wrapper { height: 650px; display: flex; justify-content: center; align-items: center; background-color: #268785; }
@@ -107,7 +108,6 @@ h1 { font-size: 24px; text-align: center; margin-bottom: 60px; letter-spacing: 2
             <div class="work-seal">我的阿公是個農夫，他有一台發財車，載著他種的水果、蔬菜、米糧來來往往。我為這台車加上許多新功能，像是做爆米香、釀小米酒、製作米粉等等，這樣阿公就不用那麼辛苦下田了。</div>
             <div class="thumb-container">
                 <img class="thumb-img active" src="阿公的發財車_全貌.jpg" onclick="switchImage('main-img-1', this)">
-                <img class="thumb-img" src="阿公的發財車_局部1.jpg" onclick="switchImage('main-img-1', this)">
             </div>
         </div>
     </div>
@@ -120,7 +120,6 @@ h1 { font-size: 24px; text-align: center; margin-bottom: 60px; letter-spacing: 2
             <div class="work-seal">我的阿嬤是個農婦，這幅畫描繪她的日常起居，比方做龍眼乾、曬米、網土芒果。多年前創作時，對鄉村十分嚮往，時常有意將其浪漫化、美化，想像阿嬤的生活是多麼幸福靜好。</div>
             <div class="thumb-container">
                 <img class="thumb-img active" src="阿嬤是偉大的田莊人_全貌.jpg" onclick="switchImage('main-img-2', this)">
-                <img class="thumb-img" src="阿嬤是偉大的田莊人_局部1.jpg" onclick="switchImage('main-img-2', this)">
             </div>
         </div>
     </div>
@@ -133,7 +132,6 @@ h1 { font-size: 24px; text-align: center; margin-bottom: 60px; letter-spacing: 2
             <div class="work-seal">我的姐姐與兩個堂姐是好麻吉，她們仨小時候曾經夢想建造一個樹屋，可以久久住在一起，快樂地過日子。</div>
             <div class="thumb-container">
                 <img class="thumb-img active" src="姐妹花_全貌.jpg" onclick="switchImage('main-img-3', this)">
-                <img class="thumb-img" src="姐妹花_局部1.jpg" onclick="switchImage('main-img-3', this)">
             </div>
         </div>
     </div>
@@ -146,7 +144,6 @@ h1 { font-size: 24px; text-align: center; margin-bottom: 60px; letter-spacing: 2
             <div class="work-seal">阿祖年輕時曾推著車子賣剉冰，老年失智後，依然記得如何手製粉圓、粉粿等配料。原本想要像《阿公的發財車》那樣、將賣冰的推車加上許多奇特功能的機器；但在進行到20%時，阿祖便過世了，於意我改變原本的構想，換成一幢冰菓室紙紮屋。</div>
             <div class="thumb-container">
                 <img class="thumb-img active" src="阿祖冰菓室_全貌.jpg" onclick="switchImage('main-img-4', this)">
-                <img class="thumb-img" src="阿祖冰菓室_局部1.jpg" onclick="switchImage('main-img-4', this)">
             </div>
         </div>
     </div>
