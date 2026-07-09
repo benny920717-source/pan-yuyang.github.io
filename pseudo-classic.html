@@ -14,10 +14,24 @@ body { font-family: Helvetica, Arial, sans-serif; margin: 0; padding: 0; backgro
 .top-navbar { position: fixed; top: 0; left: 0; width: 100%; padding: 30px 40px; box-sizing: border-box; display: flex; justify-content: space-between; align-items: center; z-index: 100; }
 .menu-toggle-btn, .search-toggle-btn { font-size: 24px; cursor: pointer; color: #ffffff; }
 
-.nav-panel { position: fixed; top: 70px; left: 40px; width: 150px; background-color: #ffffff; z-index: 90; box-shadow: 0 10px 30px rgba(0,0,0,0.08); border-radius: 6px; max-height: 0; overflow: hidden; opacity: 0; padding: 0 20px; transition: all 0.35s ease-in-out; }
-.nav-panel.open { max-height: 470px; opacity: 1; padding: 24px 20px 20px 20px; }
+.nav-panel { 
+    position: fixed; top: 70px; left: 40px; width: 150px; 
+    background-color: #ffffff; z-index: 90; box-shadow: 0 10px 30px rgba(0,0,0,0.08); 
+    border-radius: 6px; max-height: 0; overflow: hidden; opacity: 0; 
+    padding: 0 20px; transition: all 0.35s ease-in-out; 
+}
+.nav-panel.open { max-height: 500px; opacity: 1; padding: 24px 20px; }
+
 .menu-item { display: block; text-decoration: none; color: #574C57; font-size: 15px; padding: 10px 0; cursor: pointer; letter-spacing: 3px; }
-.submenu { max-height: 0; overflow: hidden; display: flex; flex-direction: column; gap: 12px; padding-left: 10px; border-left: 1px solid rgba(87,76,87,0.3); }
+/* 加大房子符號 */
+.home-link-item .fa-home { font-size: 28px; color: #574C57; display: block; padding-bottom: 10px; }
+
+/* 調整子選單滑動效果 */
+.submenu { 
+    max-height: 0; overflow: hidden; display: flex; flex-direction: column; 
+    gap: 12px; padding-left: 10px; border-left: 1px solid rgba(87,76,87,0.3);
+    transition: max-height 0.4s ease-out, margin 0.4s ease-out;
+}
 .submenu.open { max-height: 100px; margin: 8px 0; }
 .submenu-item { text-decoration: none; color: rgba(87,76,87,0.7); font-size: 13px; letter-spacing: 2px; }
 .submenu-item.active { color: #574C57; font-weight: bold; pointer-events: none; }
@@ -32,12 +46,9 @@ body { font-family: Helvetica, Arial, sans-serif; margin: 0; padding: 0; backgro
 h1 { font-size: 24px; font-weight: normal; margin-bottom: 60px; letter-spacing: 2px; text-align: center; }
 
 .work-card { margin-bottom: 140px; }
-
-/* 修正後的圖片容器，高度隨內容自動調整 */
 .work-img-wrapper { width: 100%; display: flex; justify-content: center; align-items: center; background-color: #574C57; height: auto; min-height: 300px; }
 .work-img-wrapper img { width: 100%; height: auto; max-height: 650px; object-fit: contain; }
 
-/* 按鈕區塊，始終維持與圖片的間距 */
 .trigger-container { display: flex; justify-content: center; padding-top: 10px; margin-bottom: 25px; }
 .circle-toggle-trigger { width: 44px; height: 44px; background-color: rgba(0,0,0,0.25); border-radius: 50%; display: flex; justify-content: center; align-items: center; cursor: pointer; transition: all 0.2s; }
 .circle-toggle-trigger:hover { background-color: rgba(0,0,0,0.5); }
@@ -65,10 +76,10 @@ h1 { font-size: 24px; font-weight: normal; margin-bottom: 60px; letter-spacing: 
 </header>
 
 <nav class="nav-panel" id="navPanel">
-    <a href="index.html" class="menu-item"><i class="fas fa-home"></i></a>
+    <a href="index.html" class="menu-item home-link-item"><i class="fas fa-home"></i></a>
     <a href="about.html" class="menu-item">走過</a>
     <span class="menu-item" onclick="toggleArtMenu(event)">畫過</span>
-    <div class="submenu open" id="art-submenu">
+    <div class="submenu" id="art-submenu">
         <a href="genealogy.html" class="submenu-item">族譜系列</a>
         <a href="pseudo-classic.html" class="submenu-item active">擬古系列</a>
     </div>
@@ -122,8 +133,26 @@ h1 { font-size: 24px; font-weight: normal; margin-bottom: 60px; letter-spacing: 
 </main>
 
 <script>
-    function toggleMenu() { document.getElementById('navPanel').classList.toggle('open'); }
-    function toggleArtMenu(e) { e.stopPropagation(); document.getElementById('art-submenu').classList.toggle('open'); }
+    let menuTimer;
+    function toggleMenu() { 
+        const nav = document.getElementById('navPanel');
+        nav.classList.toggle('open'); 
+        clearTimeout(menuTimer);
+        if(nav.classList.contains('open')) {
+            menuTimer = setTimeout(() => nav.classList.remove('open'), 5000);
+        }
+    }
+    
+    // 點選側欄內部時重置計時器，防止側欄在選取時消失
+    document.getElementById('navPanel').addEventListener('click', () => {
+        clearTimeout(menuTimer);
+        menuTimer = setTimeout(() => document.getElementById('navPanel').classList.remove('open'), 5000);
+    });
+
+    function toggleArtMenu(e) { 
+        e.stopPropagation(); 
+        document.getElementById('art-submenu').classList.toggle('open'); 
+    }
     function openSearch() { document.getElementById('searchOverlay').classList.add('open'); }
     function closeSearch() { document.getElementById('searchOverlay').classList.remove('open'); }
     function toggleWorkContent(t) { t.classList.toggle('open'); t.parentElement.nextElementSibling.classList.toggle('open'); }
