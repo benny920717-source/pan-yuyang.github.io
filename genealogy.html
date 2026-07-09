@@ -73,9 +73,9 @@ body {
 }
 
 .nav-panel.open {
-    max-height: 400px; 
+    max-height: 430px; /* 稍微增加最大高度以容納隔行的家的符號 */
     opacity: 1;
-    padding: 15px 20px; 
+    padding: 20px 20px; 
 }
 
 /* 側欄選單項目樣式 */
@@ -91,11 +91,13 @@ body {
 }
 .menu-item:hover { opacity: 0.7; }
 
-/* 🏠 新增：家的符號專屬樣式，置於「走過」文字前方 */
-.menu-item .fa-home {
-    margin-right: 12px; /* 與右側「走過」文字保持優雅的間距 */
-    font-size: 16px;    /* 調整合適的圖標大小 */
+/* 🏠 修改處：家的符號專屬樣式，使其成為獨立區塊並與下方的「走過」文字完美隔行 */
+.menu-item .home-icon-block {
+    display: block;       /* 關鍵：強制單獨占據一行 */
+    font-size: 20px;      /* 放大家的符號，使其更顯眼精緻 */
     color: #268785;     
+    margin-bottom: 12px;  /* 與下方的「走過」文字保持優雅的隔行上下間距 */
+    text-align: left;     /* 靠左對齊 */
 }
 
 .submenu {
@@ -432,7 +434,9 @@ h1 {
 </header>
 
 <nav class="nav-panel" id="navPanel">
-    <a href="index.html" class="menu-item"><i class="fas fa-home"></i>走過</a>
+    <a href="index.html" class="menu-item">
+        <i class="fas fa-home home-icon-block"></i>走過
+    </a>
     
     <span class="menu-item" onclick="toggleArtMenu(event)">畫過</span>
     <div class="submenu open" id="art-submenu">
