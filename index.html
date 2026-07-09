@@ -50,48 +50,45 @@ body {
 .search-toggle-btn:hover { opacity: 0.7; }
 
 /* ==========================================
-   📐 修正版：浮空下拉式小側欄 panel
+   📐 修正版：浮空下拉式小側欄 panel（改為白底）
    ========================================== */
 .nav-panel {
     position: fixed;
     top: 70px;         /* 緊貼在漢堡鈕下方 */
     left: 40px;        /* 完美對齊漢堡鈕 */
     width: 150px;      /* 秀氣的窄版寬度 */
-    background-color: #86c166; /* 保持跟背景同色 */
+    background-color: #ffffff; /* ✨ 改為純白底色 */
     z-index: 90;
     box-sizing: border-box;
     
-    /* 透過加深微陰影與微調圓角，讓它從綠色背景中立體浮現，不再隱形 */
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15); 
+    /* 配合白底，陰影調得更輕柔優雅 */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); 
     border-radius: 6px;
     
     /* 動態滑動的核心（預設隱藏） */
     max-height: 0;
     overflow: hidden;
     opacity: 0;
-    padding: 0 20px;   /* 預設上下 padding 為 0，避免沒點開時露餡 */
+    padding: 0 20px;   
     transition: max-height 0.35s ease-in-out, opacity 0.25s ease-in-out, padding 0.35s ease-in-out;
 }
 
 /* 當側欄加上 .open 樣式時優雅滑下 */
 .nav-panel.open {
-    max-height: 400px; /* 給予足夠容納所有展開項目的最大高度 */
+    max-height: 400px; 
     opacity: 1;
-    padding: 15px 20px; /* 展開時才流暢加入內襯間距 */
+    padding: 15px 20px; 
 }
 
 .menu-item {
     display: block;
     text-decoration: none;
-    color: #ffffff;
-    font-size: 15px;       /* 縮小字體，更精緻 */
+    color: #86c166;        /* ✨ 改為與背景同款的草綠色字體 */
+    font-size: 15px;       
     padding: 10px 0;
     cursor: pointer;
     letter-spacing: 3px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* 隱約的水平分界線 */
-}
-.menu-item:last-of-type {
-    border-bottom: none; /* 最後一項不需要底線 */
+    border-bottom: none;   /* ✨ 拿掉淡淡的底線 */
 }
 .menu-item:hover { opacity: 0.7; }
 
@@ -104,6 +101,8 @@ body {
     gap: 12px;
     padding-left: 10px;
     margin-left: 2px;
+    /* ✨ 將左側提示線也改成淡淡的綠色，更具整體感 */
+    border-left: 1px solid rgba(134, 193, 102, 0.3); 
     transition: max-height 0.3s ease-in-out, margin-top 0.3s ease-in-out;
 }
 /* 當子選單被加上 .open 時展開 */
@@ -114,11 +113,11 @@ body {
 }
 .submenu-item {
     text-decoration: none;
-    color: rgba(255, 255, 255, 0.75);
+    color: rgba(134, 193, 102, 0.7); /* ✨ 子選單改為草綠色（帶透明度） */
     font-size: 13px;       
     letter-spacing: 2px;
 }
-.submenu-item:hover { color: #ffffff; }
+.submenu-item:hover { color: #86c166; } /* ✨ 滑過時變回深草綠色 */
 
 /* ==========================================
    🔍 搜尋功能彈出視窗
@@ -169,7 +168,7 @@ body {
 }
 
 /* ==========================================
-   🖼px 中央主要內容區 (完全不受側欄動態影響)
+   🖼️ 中央主要內容區
    ========================================== */
 .main-content {
     padding: 120px 20px 60px 20px;
@@ -298,20 +297,17 @@ body {
 </main>
 
 <script>
-// 控制大選單的開關（再次點擊漢堡選單可以收回）
 function toggleMenu() {
     var panel = document.getElementById('navPanel');
     panel.classList.toggle('open');
 }
 
-// 控制「畫過」子選單的展開與收合
 function toggleArtMenu(event) {
-    event.stopPropagation(); // 防止點擊事件干擾到外層
+    event.stopPropagation(); 
     var submenu = document.getElementById('art-submenu');
     submenu.classList.toggle('open');
 }
 
-// 控制搜尋視窗開關
 function openSearch() {
     document.getElementById('searchOverlay').classList.add('open');
     setTimeout(() => {
