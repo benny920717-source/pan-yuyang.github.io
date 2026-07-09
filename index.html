@@ -6,6 +6,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Pan Yu-Yang</title>
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
 <style>
 body {
     font-family: Helvetica, Arial, sans-serif;
@@ -25,6 +27,8 @@ body {
     position: fixed; 
     height: 100vh;
     box-sizing: border-box;
+    z-index: 10;
+    background-color: #121212;
 }
 
 .sidebar h2 {
@@ -78,19 +82,76 @@ body {
     pointer-events: none;
 }
 
-/* 右側主要內容區區塊 */
+/* ==========================================
+   🎨 修改後的右側主要內容區（改造成置中傳送門版面）
+   ========================================== */
 .main-content {
     margin-left: 260px; 
-    padding: 100px 80px;
+    padding: 60px 40px;
+    width: calc(100% - 260px);
     box-sizing: border-box;
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    align-items: center;    /* 讓內容水平居中 */
+    justify-content: center; /* 讓內容垂直居中 */
+    min-height: 100vh;
 }
 
-.welcome-text {
-    font-size: 14px;
-    color: #555555;
+/* 頂部兩行姓名樣式 */
+.profile-name-en {
+    font-size: 32px;
     letter-spacing: 2px;
+    margin-bottom: 8px;
+    font-weight: 300;
+}
+
+.profile-name-zh {
+    font-size: 24px;
+    letter-spacing: 6px;
+    margin-bottom: 40px;
+    font-weight: 400;
+}
+
+/* 個人照顯示容器 */
+.profile-img-wrapper {
+    width: 100%;
+    max-width: 420px; /* 限制照片在電腦版上的最大寬度 */
+    margin-bottom: 50px;
+    display: flex;
+    justify-content: center;
+}
+
+.profile-img-wrapper img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    display: block;
+}
+
+/* 社群按鈕容器 */
+.social-buttons {
+    display: flex;
+    gap: 20px; /* 兩個圓圈按鈕之間的距離 */
+}
+
+/* 雙圓形按鈕樣式 */
+.circle-btn {
+    width: 44px;
+    height: 44px;
+    background-color: #333333; /* 圓圈暗色底色，與深色背景呼應 */
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 20px;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.circle-btn:hover {
+    background-color: #555555; /* 滑鼠滑過時稍微變亮 */
+    transform: scale(1.05);     /* 微微放大 */
 }
 
 /* 📱 手機版排版修正 */
@@ -115,8 +176,13 @@ body {
     .main-content {
         margin-left: 0;
         width: 100%;
-        padding: 40px 20px;
+        padding: 60px 20px;
+        min-height: calc(100vh - 200px); /* 扣掉手機版選單高度後的置中範圍 */
     }
+
+    .profile-name-en { font-size: 28px; }
+    .profile-name-zh { font-size: 20px; }
+    .profile-img-wrapper { max-width: 280px; } /* 手機版照片適度縮小 */
 }
 </style>
 </head>
@@ -137,7 +203,23 @@ body {
 </nav>
 
 <main class="main-content">
-    <div class="welcome-text">請由左側選單瀏覽。</div>
+
+    <div class="profile-name-en">Pan Yu Yang</div>
+    <div class="profile-name-zh">潘羽鍚</div>
+
+    <div class="profile-img-wrapper">
+        <img src="個人照_彩色.jpg" alt="潘羽鍚 Pan Yu Yang">
+    </div>
+
+    <div class="social-buttons">
+        <a href="https://www.instagram.com/bennypan920717/" target="_blank" class="circle-btn" title="Instagram">
+            <i class="fab fa-instagram"></i>
+        </a>
+        <a href="mailto:benny920717@gmail.com" class="circle-btn" title="Email">
+            <i class="far fa-envelope"></i>
+        </a>
+    </div>
+
 </main>
 
 <script>
