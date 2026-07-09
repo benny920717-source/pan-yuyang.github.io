@@ -78,6 +78,7 @@ body {
     padding: 15px 20px; 
 }
 
+/* 側欄選單項目樣式 */
 .menu-item {
     display: block;
     text-decoration: none;
@@ -86,8 +87,16 @@ body {
     padding: 10px 0;
     cursor: pointer;
     letter-spacing: 3px;
+    text-align: left; /* 確保所有選單文字靠左 */
 }
 .menu-item:hover { opacity: 0.7; }
+
+/* 🏠 新增：家的符號專屬樣式，置於「走過」文字前方 */
+.menu-item .fa-home {
+    margin-right: 12px; /* 與右側「走過」文字保持優雅的間距 */
+    font-size: 16px;    /* 調整合適的圖標大小 */
+    color: #268785;     
+}
 
 .submenu {
     max-height: 0;
@@ -111,6 +120,7 @@ body {
     color: rgba(38, 135, 133, 0.7); 
     font-size: 13px;       
     letter-spacing: 2px;
+    text-align: left;
 }
 .submenu-item:hover { color: #268785; } 
 
@@ -241,7 +251,7 @@ h1 {
 
 /* 主圖外殼與顯示區域 */
 .work-img-container {
-    position: relative; /* 用於定位下方的半透明圓形按鈕 */
+    position: relative; 
     width: 100%;
     margin-bottom: 20px;
 }
@@ -266,16 +276,16 @@ h1 {
 }
 
 /* ==========================================
-   🔘 新增：比照附件圖片的半透明圓形資訊控制符號
+   🔘 半透明圓形資訊控制符號
    ========================================== */
 .circle-toggle-trigger {
     position: absolute;
-    bottom: -20px;       /* 懸浮在大圖下緣中央 */
+    bottom: -20px;       
     left: 50%;
     transform: translateX(-50%);
     width: 44px;
     height: 44px;
-    background-color: rgba(0, 0, 0, 0.5); /* 完美半透明暗底 */
+    background-color: rgba(0, 0, 0, 0.5); 
     border-radius: 50%;
     display: flex;
     justify-content: center;
@@ -288,7 +298,7 @@ h1 {
 }
 
 .circle-toggle-trigger:hover {
-    background-color: rgba(0, 0, 0, 0.75); /* 懸停時略微加深 */
+    background-color: rgba(0, 0, 0, 0.75); 
 }
 
 /* 內部箭頭符號 */
@@ -316,9 +326,9 @@ h1 {
 
 /* 展開狀態 */
 .toggle-content.open {
-    max-height: 900px; /* 給予足夠高度以同時容納文字與縮圖列 */
+    max-height: 900px; 
     opacity: 1;
-    padding-top: 25px; /* 與上方按鈕拉開優雅間距 */
+    padding-top: 25px; 
 }
 
 .details-content {
@@ -342,7 +352,7 @@ h1 {
     margin-bottom: 25px;
 }
 
-/* 縮圖控制列（現已一同收納在下拉容器內） */
+/* 縮圖控制列 */
 .thumb-container {
     display: flex;
     flex-wrap: wrap;     
@@ -422,7 +432,7 @@ h1 {
 </header>
 
 <nav class="nav-panel" id="navPanel">
-    <a href="about.html" class="menu-item">走過</a>
+    <a href="index.html" class="menu-item"><i class="fas fa-home"></i>走過</a>
     
     <span class="menu-item" onclick="toggleArtMenu(event)">畫過</span>
     <div class="submenu open" id="art-submenu">
@@ -562,7 +572,7 @@ h1 {
 // 📦 網站的內建資料庫清單
 // ==========================================
 const websiteData = [
-    { title: "關於我 (走過)", desc: "潘羽鍚的個人簡介、藝術理念與生命經歷。", url: "about.html" },
+    { title: "關於我 (走過)", desc: "潘羽鍚的個人簡介、藝術理念與生命經歷。", url: "index.html" },
     { title: "族譜系列", desc: "當代水墨與藝術創作——探索家族、血緣符號與記憶重組的作品單元。", url: "printmaking.html" },
     { title: "擬古系列", desc: "傳統水墨美學的現代轉譯與模擬經典之筆墨實驗作品。", url: "pseudo-classic.html" },
     { title: "文字創作 (寫過)", desc: "收錄潘羽鍚撰寫的藝術評論、散文、隨筆與文學創作。", url: "writing.html" }
@@ -654,7 +664,7 @@ function performSearch() {
 }
 
 // ==========================================
-// 🔘 核心修改：點擊半透明圓形符號，優雅開合全收納區塊
+// 🔘 點擊半透明圓形符號，開合全收納區塊
 // ==========================================
 function toggleWorkContent(triggerElement) {
     var card = triggerElement.closest('.work-card');
@@ -663,7 +673,6 @@ function toggleWorkContent(triggerElement) {
     var content = card.querySelector('.toggle-content');
     
     if (content) {
-        // 切換控制按鈕與內容外壳的狀態
         triggerElement.classList.toggle('open');
         content.classList.toggle('open');
     }
