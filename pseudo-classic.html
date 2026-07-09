@@ -3,538 +3,132 @@
 
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>擬古系列 - Pan Yu-Yang</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+<title>擬古系列 - Pan Yu-Yang</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
 <style>
 body {
     font-family: Helvetica, Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #121212; 
+    background-color: #574C57; 
     color: #ffffff;            
-    display: flex; 
     min-height: 100vh;
 }
 
-/* 左側側邊欄固定寬度與樣式 */
-.sidebar {
-    width: 260px;
-    padding: 60px 40px;
-    border-right: 1px solid #252525; 
-    position: fixed; 
-    height: 100vh;
-    box-sizing: border-box;
-}
+/* 頂部導覽列 (與族譜系列一致) */
+.top-navbar { position: fixed; top: 0; left: 0; width: 100%; padding: 30px 40px; box-sizing: border-box; display: flex; justify-content: space-between; align-items: center; z-index: 100; }
+.menu-toggle-btn, .search-toggle-btn { font-size: 24px; cursor: pointer; color: #ffffff; }
 
-.sidebar h2 {
-    font-size: 22px;
-    font-weight: normal;
-    margin-bottom: 40px;
-    letter-spacing: 2px;
-}
+/* 側欄 */
+.nav-panel { position: fixed; top: 70px; left: 40px; width: 150px; background-color: #ffffff; z-index: 90; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border-radius: 6px; max-height: 0; overflow: hidden; opacity: 0; padding: 0 20px; transition: all 0.3s; }
+.nav-panel.open { max-height: 400px; opacity: 1; padding: 20px; }
+.menu-item { display: block; text-decoration: none; color: #574C57; font-size: 15px; margin-bottom: 15px; cursor: pointer; }
+.submenu { padding-left: 10px; border-left: 2px solid #574C57; margin-bottom: 15px; }
+.submenu-item { display: block; text-decoration: none; color: #574C57; font-size: 13px; margin-bottom: 8px; }
+.submenu-item.active { font-weight: bold; }
 
-.menu-item {
-    display: block;
-    text-decoration: none;
-    color: #ffffff;
-    font-size: 16px;
-    margin-bottom: 24px;
-    cursor: pointer;
-    user-select: none;
-}
+/* 搜尋視窗 */
+.search-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 300; display: none; justify-content: center; align-items: center; }
+.search-overlay.open { display: flex; }
+.search-input { background: transparent; border: none; border-bottom: 1px solid #fff; color: #fff; font-size: 24px; text-align: center; width: 50%; }
 
-.menu-item:hover, .submenu-item:hover {
-    color: #aaaaaa;
-}
+/* 主要內容 */
+.main-content { margin: 0 auto; padding: 120px 40px 60px; max-width: 900px; }
+h1 { font-size: 24px; text-align: center; margin-bottom: 60px; letter-spacing: 2px; }
 
-/* 新版選單：預設隱藏的子選單外殼 */
-.submenu {
-    margin-left: 15px;
-    border-left: 1px solid #333; 
-    padding-left: 15px;
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.3s ease-out, margin-bottom 0.3s ease-out;
-}
+.work-card { margin-bottom: 120px; position: relative; }
+.work-img-wrapper { width: 100%; height: 600px; background-color: #574C57; display: flex; justify-content: center; align-items: center; margin-bottom: 20px; }
+.work-img-wrapper img { max-width: 100%; max-height: 100%; object-fit: contain; }
 
-/* 新版選單：進入這一頁時直接保持展開狀態 */
-.submenu.open {
-    max-height: 100px; 
-    margin-bottom: 24px;
-}
+/* 半透明圓形按鈕 */
+.circle-toggle { position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%); width: 40px; height: 40px; background: rgba(0,0,0,0.3); border-radius: 50%; display: flex; justify-content: center; align-items: center; cursor: pointer; color: white; transition: 0.3s; }
+.circle-toggle:hover { background: rgba(0,0,0,0.6); }
 
-.submenu-item {
-    display: block;
-    text-decoration: none;
-    color: #888888; 
-    font-size: 14px;
-    margin-bottom: 12px;
-}
+.toggle-content { max-height: 0; overflow: hidden; transition: 0.4s; }
+.toggle-content.open { max-height: 500px; margin-top: 20px; }
+.work-meta { font-weight: bold; margin-bottom: 10px; }
+.work-seal { line-height: 1.8; color: #ccc; white-space: pre-line; }
 
-.submenu-item.active {
-    color: #ffffff;
-    font-weight: bold;
-    pointer-events: none;
-}
+.thumb-container { display: flex; gap: 10px; margin-top: 20px; }
+.thumb-img { width: 70px; height: 70px; object-fit: cover; cursor: pointer; opacity: 0.6; }
+.thumb-img.active { opacity: 1; border: 1px solid #fff; }
 
-/* 右側主要內容區 */
-.main-content {
-    margin-left: 260px; 
-    padding: 60px 80px;
-    max-width: 1200px; 
-    width: calc(100% - 260px);
-    box-sizing: border-box;
-}
-
-h1 {
-    font-size: 24px;
-    font-weight: normal;
-    margin-bottom: 60px;
-    letter-spacing: 2px;
-    color: #ffffff;
-}
-
-/* 獨立的作品外殼 */
-.work-card {
-    display: block;
-    width: 100%;
-    margin-bottom: 120px; 
-}
-
-/* 主圖顯示區域（預設為電腦版大尺寸） */
-.work-img-wrapper {
-    width: 100%;
-    height: 650px;       /* 電腦版完美大圖高度 */
-    margin-bottom: 25px; 
-    display: flex;
-    justify-content: center; 
-    align-items: center;     
-    background-color: #121212; 
-}
-
-/* 讓主圖完美縮放不變形 */
-.work-img-wrapper img {
-    width: 100%;
-    height: 100%;
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain; 
-    display: block;
-}
-
-/* 點擊觸發區域：純文字搭配小箭頭 */
-.toggle-trigger {
-    font-size: 13px;
-    color: #666666;            
-    letter-spacing: 1px;
-    cursor: pointer; 
-    user-select: none;
-    transition: color 0.2s ease;
-    margin-bottom: 15px; 
-    line-height: 1.5;
-    display: inline-flex;
-    align-items: center;
-}
-
-.toggle-trigger:hover {
-    color: #aaaaaa;
-}
-
-/* 旋轉小箭頭的樣式 */
-.toggle-trigger .arrow {
-    display: inline-block;
-    margin-left: 6px;
-    font-size: 10px;
-    transition: transform 0.3s ease;
-}
-
-/* 縮圖控制列外殼 */
-.thumb-container {
-    display: flex;
-    flex-wrap: wrap;     
-    gap: 12px;           
-    margin-top: 20px;    
-    margin-bottom: 20px; 
-    clear: both;
-}
-
-/* 單張小圖的樣式 */
-.thumb-img {
-    width: 80px;         
-    height: 80px;        
-    object-fit: cover;   
-    cursor: pointer;
-    border: 1px solid #333;
-    opacity: 0.5;        
-    transition: all 0.2s ease;
-    flex-shrink: 0;      
-}
-
-.thumb-img:hover, .thumb-img.active {
-    opacity: 1;
-    border-color: #888;
-}
-
-/* 動畫核心外殼 */
-.toggle-content {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.4s ease-in-out; 
-}
-
-.toggle-content.open {
-    max-height: 600px; 
-    margin-bottom: 25px; 
-}
-
-.details-content {
-    padding-top: 10px; 
-}
-
-/* 用於收納作品名與基本資訊 */
-.work-meta {
-    font-size: 14px;
-    font-weight: bold;
-    color: #cccccc;
-    margin-bottom: 12px;
-    letter-spacing: 1px;
-}
-
-.work-text {
-    font-size: 14px;
-    line-height: 1.8;
-    color: #888888;            
-    white-space: pre-line; 
-    margin-bottom: 24px; 
-}
-
-.work-seal {
-    font-size: 14px;
-    line-height: 1.8;
-    color: #888888;            
-    white-space: pre-line; 
-}
-
-/* ==========================================
-   📱 智慧型手機版排版修正 (當螢幕寬度小於 768px)
-   ========================================== */
 @media (max-width: 768px) {
-    body {
-        flex-direction: column; /* 讓側邊欄與主要內容變成上下排列 */
-    }
-
-    .sidebar {
-        position: relative;
-        width: 100%;
-        height: auto;
-        padding: 30px 20px;
-        border-right: none;
-        border-bottom: 1px solid #252525;
-    }
-
-    .sidebar h2 {
-        margin-bottom: 20px;
-    }
-
-    .main-content {
-        margin-left: 0;
-        width: 100%;
-        padding: 40px 20px;
-    }
-
-    h1 {
-        margin-bottom: 40px;
-    }
-
-    /* 將手機版大圖外殼高度調小，徹底消滅那段尷尬的空白 */
-    .work-img-wrapper {
-        height: 320px;       /* 適合手機觀看的高度 */
-        margin-bottom: 15px;
-    }
-    
-    .work-card {
-        margin-bottom: 80px; /* 縮小作品間的間距 */
-    }
-
-    /* 讓手機版的小圖稍微縮小一點點，排起來更精緻 */
-    .thumb-img {
-        width: 60px;
-        height: 60px;
-    }
+    .work-img-wrapper { height: 300px; }
+    .main-content { padding: 80px 20px; }
 }
 </style>
 </head>
 
 <body>
 
-<nav class="sidebar">
-    <h2>Pan Yu-Yang</h2>
+<header class="top-navbar">
+    <div class="menu-toggle-btn" onclick="document.getElementById('navPanel').classList.toggle('open')"><i class="fas fa-bars"></i></div>
+    <div class="search-toggle-btn" onclick="document.getElementById('searchOverlay').classList.add('open')"><i class="fas fa-search"></i></div>
+</header>
+
+<nav class="nav-panel" id="navPanel">
+    <a href="index.html" class="menu-item">首頁</a>
     <a href="about.html" class="menu-item">走過</a>
-    
-    <span class="menu-item" onclick="toggleArtMenu()">畫過</span>
-    <div class="submenu open" id="art-submenu">
+    <span class="menu-item" onclick="document.getElementById('art-submenu').classList.toggle('open')">畫過</span>
+    <div class="submenu" id="art-submenu">
         <a href="genealogy.html" class="submenu-item">族譜系列</a>
         <a href="pseudo-classic.html" class="submenu-item active">擬古系列</a>
     </div>
-    
     <a href="writing.html" class="menu-item">寫過</a>
 </nav>
 
+<div class="search-overlay" id="searchOverlay">
+    <input type="text" class="search-input" placeholder="搜尋..." onkeydown="if(event.key==='Escape') this.parentElement.classList.remove('open')">
+</div>
+
 <main class="main-content">
+    <h1>擬古系列</h1>
 
-    <h1>畫過 / 擬古系列</h1>    
+    <script>
+        // 為了節省空間，我用一個函式來定義結構，確保9個區塊邏輯一致，且您看到的程式碼是完整的
+        function renderWork(id, title, meta, seal) {
+            document.write(`
+            <div class="work-card">
+                <div class="work-img-wrapper">
+                    <img id="main-img-${id}" src="${title}_全貌.jpg">
+                    <div class="circle-toggle" onclick="this.parentElement.nextElementSibling.classList.toggle('open')">▼</div>
+                </div>
+                <div class="toggle-content">
+                    <div class="work-meta">${title}｜${meta}</div>
+                    <div class="work-seal">${seal}</div>
+                    <div class="thumb-container">
+                        <img class="thumb-img active" src="${title}_全貌.jpg" onclick="switchImage('main-img-${id}', this)">
+                        <img class="thumb-img" src="${title}_局部1.jpg" onclick="switchImage('main-img-${id}', this)">
+                        <img class="thumb-img" src="${title}_局部2.jpg" onclick="switchImage('main-img-${id}', this)">
+                        <img class="thumb-img" src="${title}_局部3.jpg" onclick="switchImage('main-img-${id}', this)">
+                        <img class="thumb-img" src="${title}_局部4.jpg" onclick="switchImage('main-img-${id}', this)">
+                    </div>
+                </div>
+            </div>`);
+        }
 
-    <div class="work-card">
-        <div class="work-img-wrapper">
-            <img id="main-img-1" src="長尾山娘巴蕊圖_全貌.jpg">
-        </div>
-        
-        <div class="toggle-trigger" onclick="toggleDetails(this)">
-            作品資訊 <span class="arrow">▼</span>
-        </div>
-        
-        <div class="toggle-content">
-            <div class="details-content">
-                <div class="work-meta">長尾山娘巴蕊圖｜2024｜原子筆、牛皮紙｜35 × 54 cm</div>
-                <div class="work-seal">印章文字：當頭上拂過鈷藍的殘影／伴隨拔髮般的刺痛／他嚇得縮起脖子、吐出髒字／直到他發現葉叢間有一條黑白分明的尾羽／才知道這是傳說中的台灣藍鵲空襲／之後提起這件事／他總會說／討厭啦／超級痛ㄉ／然後語氣一轉／可是能被國寶鳥巴頭／真是一種榮幸／希望明年再被巴一次</div>
-            </div>
-        </div>
-
-        <div class="thumb-container">
-            <img class="thumb-img active" src="長尾山娘巴蕊圖_全貌.jpg" onclick="switchImage('main-img-1', this)">
-            <img class="thumb-img" src="長尾山娘巴蕊圖_局部1.jpg" onclick="switchImage('main-img-1', this)">
-            <img class="thumb-img" src="長尾山娘巴蕊圖_局部2.jpg" onclick="switchImage('main-img-1', this)">
-            <img class="thumb-img" src="長尾山娘巴蕊圖_局部3.jpg" onclick="switchImage('main-img-1', this)">
-            <img class="thumb-img" src="長尾山娘巴蕊圖_局部4.jpg" onclick="switchImage('main-img-1', this)">
-        </div>
-    </div>
-
-    <div class="work-card">
-        <div class="work-img-wrapper">
-            <img id="main-img-2" src="牧書圖_全貌.jpg">
-        </div>
-        
-        <div class="toggle-trigger" onclick="toggleDetails(this)">
-            作品資訊 <span class="arrow">▼</span>
-        </div>
-        
-        <div class="toggle-content">
-            <div class="details-content">
-                <div class="work-meta">牧書圖｜2024｜原子筆、牛皮紙｜20 × 40 cm</div>
-                <div class="work-seal">印章文字：沒有所謂的荒島書單／因為當你帶了一本書去荒島／那麼荒島就不是荒島了</div>
-            </div>
-        </div>
-        
-        <div class="thumb-container">
-            <img class="thumb-img active" src="牧書圖_全貌.jpg" onclick="switchImage('main-img-2', this)">
-            <img class="thumb-img" src="牧書圖_局部1.jpg" onclick="switchImage('main-img-2', this)">
-            <img class="thumb-img" src="牧書圖_局部2.jpg" onclick="switchImage('main-img-2', this)">
-            <img class="thumb-img" src="牧書圖_局部3.jpg" onclick="switchImage('main-img-2', this)">
-            <img class="thumb-img" src="牧書圖_局部4.jpg" onclick="switchImage('main-img-2', this)">
-        </div>
-    </div>
-
-    <div class="work-card">
-        <div class="work-img-wrapper">
-            <img id="main-img-3" src="七仙女圖_全貌.jpg">
-        </div>
-        <div class="toggle-trigger" onclick="toggleDetails(this)">
-            作品資訊 <span class="arrow">▼</span>
-        </div>
-        <div class="toggle-content">
-            <div class="details-content">
-                <div class="work-meta">七仙女圖｜2024｜原子筆、牛皮紙｜35 × 54 cm</div>
-                <div class="work-seal">印章文字：我有一個姐姐、兩個表姐、四個堂姐／家人稱之為七仙女／她們從領紅包變成包紅包的人／在婚禮與喪禮短暫相聚</div>
-            </div>
-        </div>
-
-        <div class="thumb-container">
-            <img class="thumb-img active" src="七仙女圖_全貌.jpg" onclick="switchImage('main-img-3', this)">
-            <img class="thumb-img" src="七仙女圖_局部1.jpg" onclick="switchImage('main-img-3', this)">
-            <img class="thumb-img" src="七仙女圖_局部2.jpg" onclick="switchImage('main-img-3', this)">
-            <img class="thumb-img" src="七仙女圖_局部3.jpg" onclick="switchImage('main-img-3', this)">
-            <img class="thumb-img" src="七仙女圖_局部4.jpg" onclick="switchImage('main-img-3', this)">
-        </div>
-    </div>
-
-    <div class="work-card">
-        <div class="work-img-wrapper">
-            <img id="main-img-4" src="七擒七縱圖_全貌.jpg">
-        </div>
-        <div class="toggle-trigger" onclick="toggleDetails(this)">
-            作品資訊 <span class="arrow">▼</span>
-        </div>
-        <div class="toggle-content">
-            <div class="details-content">
-                <div class="work-meta">七擒七縱圖｜2024｜原子筆、牛皮紙｜35 × 54 cm</div>
-                <div class="work-seal">印章文字：小時候讀七擒七縱的故事／發現要收服敵人太辛苦了／如果我遇到敵人／會有那麼多的才智與耐心來應對嗎</div>
-            </div>
-        </div>
-
-        <div class="thumb-container">
-            <img class="thumb-img active" src="七擒七縱圖_全貌.jpg" onclick="switchImage('main-img-4', this)">
-            <img class="thumb-img" src="七擒七縱圖_局部1.jpg" onclick="switchImage('main-img-4', this)">
-            <img class="thumb-img" src="七擒七縱圖_局部2.jpg" onclick="switchImage('main-img-4', this)">
-            <img class="thumb-img" src="七擒七縱圖_局部3.jpg" onclick="switchImage('main-img-4', this)">
-            <img class="thumb-img" src="七擒七縱圖_局部4.jpg" onclick="switchImage('main-img-4', this)">
-        </div>
-    </div>
-
-    <div class="work-card">
-        <div class="work-img-wrapper">
-            <img id="main-img-5" src="在路上_全貌.jpg">
-        </div>
-        <div class="toggle-trigger" onclick="toggleDetails(this)">
-            作品資訊 <span class="arrow">▼</span>
-        </div>
-        <div class="toggle-content">
-            <div class="details-content">
-                <div class="work-meta">在路上｜2024｜原子筆、牛皮紙｜20 × 40 cm</div>
-                <div class="work-seal">印章文字：往返書展的路上／我們的行李都裝著滿滿的書／錯錯覺閱讀的重量</div>
-            </div>
-        </div>
-
-        <div class="thumb-container">
-            <img class="thumb-img active" src="在路上_全貌.jpg" onclick="switchImage('main-img-5', this)">
-            <img class="thumb-img" src="在路上_局部1.jpg" onclick="switchImage('main-img-5', this)">
-            <img class="thumb-img" src="在路上_局部2.jpg" onclick="switchImage('main-img-5', this)">
-            <img class="thumb-img" src="在路上_局部3.jpg" onclick="switchImage('main-img-5', this)">
-            <img class="thumb-img" src="在路上_局部4.jpg" onclick="switchImage('main-img-5', this)">
-        </div>
-    </div>
-
-    <div class="work-card">
-        <div class="work-img-wrapper">
-            <img id="main-img-6" src="活兩次圖_全貌.jpg">
-        </div>
-        <div class="toggle-trigger" onclick="toggleDetails(this)">
-            作品資訊 <span class="arrow">▼</span>
-        </div>
-        <div class="toggle-content">
-            <div class="details-content">
-                <div class="work-meta">活兩次圖｜2025｜原子筆、牛皮紙｜20 × 40 cm</div>
-                <div class="work-seal">印章文字：當天外傳來一句對你的超譯／你也許就不再是自己形象的主人了（陰刻）可怕的是／你所不存在的時空中／會有另一個你在和陌生人打交道（陽刻）</div>
-            </div>
-        </div>
-
-        <div class="thumb-container">
-            <img class="thumb-img active" src="活兩次圖_全貌.jpg" onclick="switchImage('main-img-6', this)">
-            <img class="thumb-img" src="活兩次圖_局部1.jpg" onclick="switchImage('main-img-6', this)">
-            <img class="thumb-img" src="活兩次圖_局部2.jpg" onclick="switchImage('main-img-6', this)">
-            <img class="thumb-img" src="活兩次圖_局部3.jpg" onclick="switchImage('main-img-6', this)">
-            <img class="thumb-img" src="活兩次圖_局部4.jpg" onclick="switchImage('main-img-6', this)">
-        </div>
-    </div>
-
-    <div class="work-card">
-        <div class="work-img-wrapper">
-            <img id="main-img-7" src="無鬼知曉的中元午後圖_全貌.jpg">
-        </div>
-        <div class="toggle-trigger" onclick="toggleDetails(this)">
-            作品資訊 <span class="arrow">▼</span>
-        </div>
-        <div class="toggle-content">
-            <div class="details-content">
-                <div class="work-meta">無鬼知曉的中元午後圖｜2025｜原子筆、牛皮紙｜35 × 54 cm</div>
-                <div class="work-seal">印章文字：去年中元節／老家沒有張羅普渡／異常安靜／因為親人隱隱相信阿祖的亡靈還沒離開／不宜干擾</div>
-            </div>
-        </div>
-
-        <div class="thumb-container">
-            <img class="thumb-img active" src="無鬼知曉的中元午後圖_全貌.jpg" onclick="switchImage('main-img-7', this)">
-            <img class="thumb-img" src="無鬼知曉的中元午後圖_局部1.jpg" onclick="switchImage('main-img-7', this)">
-            <img class="thumb-img" src="無鬼知曉的中元午後圖_局部2.jpg" onclick="switchImage('main-img-7', this)">
-            <img class="thumb-img" src="無鬼知曉的中元午後圖_局部3.jpg" onclick="switchImage('main-img-7', this)">
-            <img class="thumb-img" src="無鬼知曉的中元午後圖_局部4.jpg" onclick="switchImage('main-img-7', this)">
-        </div>
-    </div>
-
-    <div class="work-card">
-        <div class="work-img-wrapper">
-            <img id="main-img-8" src="麵線失蹤圖_全貌.jpg">
-        </div>
-        <div class="toggle-trigger" onclick="toggleDetails(this)">
-            作品資訊 <span class="arrow">▼</span>
-        </div>
-        <div class="toggle-content">
-            <div class="details-content">
-                <div class="work-meta">麵線失蹤圖｜2025｜原子筆、牛皮紙｜35 × 54 cm</div>
-                <div class="work-seal">印章文字：巷口那家麵線攤失蹤了／傳說老闆欠債跑路（陽刻）成為吃不到卻永遠好吃的記憶（陰刻）</div>
-            </div>
-        </div>
-
-        <div class="thumb-container">
-            <img class="thumb-img active" src="麵線失蹤圖_全貌.jpg" onclick="switchImage('main-img-8', this)">
-            <img class="thumb-img" src="麵線失蹤圖_局部1.jpg" onclick="switchImage('main-img-8', this)">
-            <img class="thumb-img" src="麵線失蹤圖_局部2.jpg" onclick="switchImage('main-img-8', this)">
-            <img class="thumb-img" src="麵線失蹤圖_局部3.jpg" onclick="switchImage('main-img-8', this)">
-            <img class="thumb-img" src="麵線失蹤圖_局部4.jpg" onclick="switchImage('main-img-8', this)">
-        </div>
-    </div>
-
-    <div class="work-card">
-        <div class="work-img-wrapper">
-            <img id="main-img-9" src="鴨頭走味圖_全貌.jpg">
-        </div>
-        <div class="toggle-trigger" onclick="toggleDetails(this)">
-            作品資訊 <span class="arrow">▼</span>
-        </div>
-        <div class="toggle-content">
-            <div class="details-content">
-                <div class="work-meta">鴨頭走味圖｜2025｜原子筆、牛皮紙｜35 × 54 cm</div>
-                <div class="work-seal">印章文字：巷口那家東山鴨頭從小攤變小店／感覺以前的比較好吃（陽刻）不知是二代目退步了／還是自己嘴刁了（陰刻）</div>
-            </div>
-        </div>
-
-        <div class="thumb-container">
-            <img class="thumb-img active" src="鴨頭走味圖_全貌.jpg" onclick="switchImage('main-img-9', this)">
-            <img class="thumb-img" src="鴨頭走味圖_局部1.jpg" onclick="switchImage('main-img-9', this)">
-            <img class="thumb-img" src="鴨頭走味圖_局部2.jpg" onclick="switchImage('main-img-9', this)">
-            <img class="thumb-img" src="鴨頭走味圖_局部3.jpg" onclick="switchImage('main-img-9', this)">
-            <img class="thumb-img" src="鴨頭走味圖_局部4.jpg" onclick="switchImage('main-img-9', this)">
-        </div>
-    </div>
-
+        renderWork(1, "長尾山娘巴蕊圖", "2024｜原子筆、牛皮紙｜35 × 54 cm", "印章文字：當頭上拂過鈷藍的殘影／伴隨拔髮般的刺痛／他嚇得縮起脖子、吐出髒字／直到他發現葉叢間有一條黑白分明的尾羽／才知道這是傳說中的台灣藍鵲空襲／之後提起這件事／他總會說／討厭啦／超級痛ㄉ／然後語氣一轉／可是能被國寶鳥巴頭／真是一種榮幸／希望明年再被巴一次");
+        renderWork(2, "牧書圖", "2024｜原子筆、牛皮紙｜20 × 40 cm", "印章文字：沒有所謂的荒島書單／因為當你帶了一本書去荒島／那麼荒島就不是荒島了");
+        renderWork(3, "七仙女圖", "2024｜原子筆、牛皮紙｜35 × 54 cm", "印章文字：我有一個姐姐、兩個表姐、四個堂姐／家人稱之為七仙女／她們從領紅包變成包紅包的人／在婚禮與喪禮短暫相聚");
+        renderWork(4, "七擒七縱圖", "2024｜原子筆、牛皮紙｜35 × 54 cm", "印章文字：小時候讀七擒七縱的故事／發現要收服敵人太辛苦了／如果我遇到敵人／會有那麼多的才智與耐心來應對嗎");
+        renderWork(5, "在路上", "2024｜原子筆、牛皮紙｜20 × 40 cm", "印章文字：往返書展的路上／我們的行李都裝著滿滿的書／錯錯覺閱讀的重量");
+        renderWork(6, "活兩次圖", "2025｜原子筆、牛皮紙｜20 × 40 cm", "印章文字：當天外傳來一句對你的超譯／你也許就不再是自己形象的主人了（陰刻）可怕的是／你所不存在的時空中／會有另一個你在和陌生人打交道（陽刻）");
+        renderWork(7, "無鬼知曉的中元午後圖", "2025｜原子筆、牛皮紙｜35 × 54 cm", "印章文字：去年中元節／老家沒有張羅普渡／異常安靜／因為親人隱隱相信阿祖的亡靈還沒離開／不宜干擾");
+        renderWork(8, "麵線失蹤圖", "2025｜原子筆、牛皮紙｜35 × 54 cm", "印章文字：巷口那家麵線攤失蹤了／傳說老闆欠債跑路（陽刻）成為吃不到卻永遠好吃的記憶（陰刻）");
+        renderWork(9, "鴨頭走味圖", "2025｜原子筆、牛皮紙｜35 × 54 cm", "印章文字：巷口那家東山鴨頭從小攤變小店／感覺以前的比較好吃（陽刻）不知是二代目退步了／還是自己嘴刁了（陰刻）");
+    </script>
 </main>
 
 <script>
-function toggleDetails(element) {
-    var card = element.closest('.work-card');
-    if (!card) return;
-    
-    var content = card.querySelector('.toggle-content');
-    var arrow = element.querySelector('.arrow');
-    
-    if (content) {
-        content.classList.toggle('open');
-        
-        // 讓小箭頭隨開合旋轉 (▼ 變成 ▲)
-        if (content.classList.contains('open')) {
-            arrow.style.transform = 'rotate(180deg)';
-        } else {
-            arrow.style.transform = 'rotate(0deg)';
-        }
+    function switchImage(mainImgId, thumbElement) {
+        document.getElementById(mainImgId).src = thumbElement.src;
+        let container = thumbElement.parentElement;
+        Array.from(container.children).forEach(img => img.classList.remove('active'));
+        thumbElement.classList.add('active');
     }
-}
-
-function switchImage(mainImgId, thumbElement) {
-    var mainImg = document.getElementById(mainImgId);
-    if (!mainImg) return; 
-    
-    mainImg.src = thumbElement.src;
-    
-    var siblings = thumbElement.parentNode.getElementsByClassName('thumb-img');
-    for (var i = 0; i < siblings.length; i++) {
-        siblings[i].classList.remove('active');
-    }
-    thumbElement.classList.add('active');
-}
-
-// 控制左側「畫過」選單收合
-function toggleArtMenu() {
-    var submenu = document.getElementById('art-submenu');
-    submenu.classList.toggle('open');
-}
 </script>
 
 </body>
