@@ -73,7 +73,7 @@ body {
 }
 
 .nav-panel.open {
-    max-height: 430px; /* 稍微增加最大高度以容納隔行的家的符號 */
+    max-height: 450px; /* 增加最大高度以舒適容納所有分行按鈕 */
     opacity: 1;
     padding: 20px 20px; 
 }
@@ -87,17 +87,17 @@ body {
     padding: 10px 0;
     cursor: pointer;
     letter-spacing: 3px;
-    text-align: left; /* 確保所有選單文字靠左 */
+    text-align: left; /* 確保所有連結文字與圖標靠左 */
 }
 .menu-item:hover { opacity: 0.7; }
 
-/* 🏠 修改處：家的符號專屬樣式，使其成為獨立區塊並與下方的「走過」文字完美隔行 */
-.menu-item .home-icon-block {
-    display: block;       /* 關鍵：強制單獨占據一行 */
-    font-size: 20px;      /* 放大家的符號，使其更顯眼精緻 */
-    color: #268785;     
-    margin-bottom: 12px;  /* 與下方的「走過」文字保持優雅的隔行上下間距 */
-    text-align: left;     /* 靠左對齊 */
+/* 🏠 新增：獨立「家的符號」專屬按鈕樣式 */
+.home-link-item {
+    padding-bottom: 2px;  /* 讓家與底下的「走過」保持適當的行距微距 */
+}
+.home-link-item .fa-home {
+    font-size: 20px;      /* 讓首頁圖標稍微放大，更清晰精緻 */
+    color: #268785;
 }
 
 .submenu {
@@ -434,9 +434,11 @@ h1 {
 </header>
 
 <nav class="nav-panel" id="navPanel">
-    <a href="index.html" class="menu-item">
-        <i class="fas fa-home home-icon-block"></i>走過
+    <a href="index.html" class="menu-item home-link-item">
+        <i class="fas fa-home"></i>
     </a>
+    
+    <a href="about.html" class="menu-item">走過</a>
     
     <span class="menu-item" onclick="toggleArtMenu(event)">畫過</span>
     <div class="submenu open" id="art-submenu">
@@ -576,7 +578,8 @@ h1 {
 // 📦 網站的內建資料庫清單
 // ==========================================
 const websiteData = [
-    { title: "關於我 (走過)", desc: "潘羽鍚的個人簡介、藝術理念與生命經歷。", url: "index.html" },
+    { title: "首頁 (首頁)", desc: "潘羽鍚的官方網站主頁與彩色個人肖像照。", url: "index.html" },
+    { title: "關於我 (走過)", desc: "潘羽鍚的個人簡介、藝術理念與生命經歷學歷。", url: "about.html" },
     { title: "族譜系列", desc: "當代水墨與藝術創作——探索家族、血緣符號與記憶重組的作品單元。", url: "printmaking.html" },
     { title: "擬古系列", desc: "傳統水墨美學的現代轉譯與模擬經典之筆墨實驗作品。", url: "pseudo-classic.html" },
     { title: "文字創作 (寫過)", desc: "收錄潘羽鍚撰寫的藝術評論、散文、隨筆與文學創作。", url: "writing.html" }
