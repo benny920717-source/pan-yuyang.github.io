@@ -8,89 +8,42 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
 <style>
-body {
-    font-family: Helvetica, Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #574C57; /* 指定底色 */
-    color: #ffffff;            
-    min-height: 100vh;
-    overflow-x: hidden;
-}
+body { font-family: Helvetica, Arial, sans-serif; margin: 0; padding: 0; background-color: #574C57; color: #ffffff; min-height: 100vh; overflow-x: hidden; }
 
-/* 頂部導覽列 */
-.top-navbar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    padding: 30px 40px;
-    box-sizing: border-box;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    z-index: 100;
-}
+/* 導覽列與側欄 */
+.top-navbar { position: fixed; top: 0; left: 0; width: 100%; padding: 30px 40px; box-sizing: border-box; display: flex; justify-content: space-between; align-items: center; z-index: 100; }
+.menu-toggle-btn, .search-toggle-btn { font-size: 24px; cursor: pointer; color: #ffffff; }
 
-.menu-toggle-btn, .search-toggle-btn {
-    font-size: 24px;
-    cursor: pointer;
-    transition: opacity 0.2s;
-    color: #ffffff;
-}
-.menu-toggle-btn:hover, .search-toggle-btn:hover { opacity: 0.7; }
-
-/* 側欄選單 */
-.nav-panel {
-    position: fixed;
-    top: 70px; left: 40px; width: 150px;
-    background-color: #ffffff; 
-    z-index: 90;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); 
-    border-radius: 6px;
-    max-height: 0;
-    overflow: hidden;
-    opacity: 0;
-    padding: 0 20px;   
-    transition: all 0.35s ease-in-out;
-}
+.nav-panel { position: fixed; top: 70px; left: 40px; width: 150px; background-color: #ffffff; z-index: 90; box-shadow: 0 10px 30px rgba(0,0,0,0.08); border-radius: 6px; max-height: 0; overflow: hidden; opacity: 0; padding: 0 20px; transition: all 0.35s ease-in-out; }
 .nav-panel.open { max-height: 470px; opacity: 1; padding: 24px 20px 20px 20px; }
-
 .menu-item { display: block; text-decoration: none; color: #574C57; font-size: 15px; padding: 10px 0; cursor: pointer; letter-spacing: 3px; }
-.home-link-item { padding-bottom: 12px; }
-.home-link-item .fa-home { font-size: 20px; color: #574C57; }
-
-.submenu { max-height: 0; overflow: hidden; display: flex; flex-direction: column; gap: 12px; padding-left: 10px; border-left: 1px solid rgba(87, 76, 87, 0.3); }
+.submenu { max-height: 0; overflow: hidden; display: flex; flex-direction: column; gap: 12px; padding-left: 10px; border-left: 1px solid rgba(87,76,87,0.3); }
 .submenu.open { max-height: 100px; margin: 8px 0; }
-.submenu-item { text-decoration: none; color: rgba(87, 76, 87, 0.7); font-size: 13px; letter-spacing: 2px; }
+.submenu-item { text-decoration: none; color: rgba(87,76,87,0.7); font-size: 13px; letter-spacing: 2px; }
 .submenu-item.active { color: #574C57; font-weight: bold; pointer-events: none; }
 
 /* 搜尋視窗 */
-.search-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background-color: rgba(0, 0, 0, 0.88); z-index: 300; display: flex; flex-direction: column; align-items: center; padding-top: 15vh; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
+.search-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background-color: rgba(0,0,0,0.88); z-index: 300; display: flex; flex-direction: column; align-items: center; padding-top: 15vh; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
 .search-overlay.open { opacity: 1; pointer-events: auto; }
-.close-search-btn { position: absolute; top: 30px; right: 40px; font-size: 26px; cursor: pointer; }
 .search-input { width: 80%; max-width: 500px; background: transparent; border: none; border-bottom: 2px solid #ffffff; padding: 10px; color: #ffffff; font-size: 22px; text-align: center; outline: none; }
 
 /* 內容區 */
 .main-content { margin: 0 auto; padding: 120px 40px 60px 40px; max-width: 900px; width: 100%; box-sizing: border-box; }
 h1 { font-size: 24px; font-weight: normal; margin-bottom: 60px; letter-spacing: 2px; text-align: center; }
 
-.work-card { display: block; width: 100%; margin-bottom: 140px; position: relative; }
-.work-img-wrapper { width: 100%; height: 650px; display: flex; justify-content: center; align-items: center; background-color: #574C57; margin-bottom: 20px; }
-.work-img-wrapper img { width: 100%; height: 100%; object-fit: contain; }
+.work-card { margin-bottom: 140px; }
+.work-img-wrapper { width: 100%; height: 650px; display: flex; justify-content: center; align-items: center; background-color: #574C57; }
+.work-img-wrapper img { max-width: 100%; max-height: 100%; object-fit: contain; }
 
-/* 互動圓形按鈕 */
-.circle-toggle-trigger {
-    position: absolute; bottom: -20px; left: 50%; transform: translateX(-50%); width: 44px; height: 44px;
-    background-color: rgba(0, 0, 0, 0.25); border-radius: 50%; display: flex; justify-content: center; align-items: center; cursor: pointer; z-index: 10; transition: all 0.2s;
-}
-.circle-toggle-trigger:hover { background-color: rgba(0, 0, 0, 0.5); }
+/* 修正後的按鈕結構 */
+.trigger-container { display: flex; justify-content: center; padding-top: 10px; margin-bottom: 25px; }
+.circle-toggle-trigger { width: 44px; height: 44px; background-color: rgba(0,0,0,0.25); border-radius: 50%; display: flex; justify-content: center; align-items: center; cursor: pointer; transition: all 0.2s; }
+.circle-toggle-trigger:hover { background-color: rgba(0,0,0,0.5); }
 .circle-toggle-trigger.open .arrow-icon { transform: rotate(180deg); }
 
 .toggle-content { max-height: 0; overflow: hidden; transition: all 0.45s ease-in-out; opacity: 0; }
-.toggle-content.open { max-height: 900px; opacity: 1; padding-top: 25px; }
-
-.work-meta { font-size: 15px; font-weight: bold; margin-bottom: 14px; letter-spacing: 1px; color: #ffffff; }
+.toggle-content.open { max-height: 900px; opacity: 1; }
+.work-meta { font-size: 15px; font-weight: bold; margin-bottom: 14px; color: #ffffff; }
 .work-seal { font-size: 14px; line-height: 1.8; color: #e0f2f1; white-space: pre-line; margin-bottom: 25px; }
 .thumb-container { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 15px; }
 .thumb-img { width: 80px; height: 80px; object-fit: cover; cursor: pointer; border: 1px solid #3d363d; opacity: 0.5; transition: all 0.2s; }
@@ -105,14 +58,13 @@ h1 { font-size: 24px; font-weight: normal; margin-bottom: 60px; letter-spacing: 
 </head>
 
 <body>
-
 <header class="top-navbar">
     <div class="menu-toggle-btn" onclick="toggleMenu()"><i class="fas fa-bars"></i></div>
     <div class="search-toggle-btn" onclick="openSearch()"><i class="fas fa-search"></i></div>
 </header>
 
 <nav class="nav-panel" id="navPanel">
-    <a href="index.html" class="menu-item home-link-item"><i class="fas fa-home"></i></a>
+    <a href="index.html" class="menu-item"><i class="fas fa-home"></i></a>
     <a href="about.html" class="menu-item">走過</a>
     <span class="menu-item" onclick="toggleArtMenu(event)">畫過</span>
     <div class="submenu open" id="art-submenu">
@@ -123,13 +75,12 @@ h1 { font-size: 24px; font-weight: normal; margin-bottom: 60px; letter-spacing: 
 </nav>
 
 <div class="search-overlay" id="searchOverlay">
-    <div class="close-search-btn" onclick="closeSearch()"><i class="fas fa-times"></i></div>
-    <input type="text" class="search-input" id="searchInput" placeholder="搜尋...">
+    <div style="position:absolute; top:30px; right:40px; font-size:26px; cursor:pointer;" onclick="closeSearch()"><i class="fas fa-times"></i></div>
+    <input type="text" class="search-input" placeholder="搜尋...">
 </div>
 
 <main class="main-content">
     <h1>擬古系列</h1>    
-
     <script>
         const works = [
             { id: 1, title: "長尾山娘巴蕊圖", info: "2024｜原子筆、牛皮紙｜35 × 54 cm", seal: "印章文字：當頭上拂過鈷藍的殘影／伴隨拔髮般的刺痛／他嚇得縮起脖子、吐出髒字／直到他發現葉叢間有一條黑白分明的尾羽／才知道這是傳說中的台灣藍鵲空襲／之後提起這件事／他總會說／討厭啦／超級痛ㄉ／然後語氣一轉／可是能被國寶鳥巴頭／真是一種榮幸／希望明年再被巴一次" },
@@ -148,6 +99,8 @@ h1 { font-size: 24px; font-weight: normal; margin-bottom: 60px; letter-spacing: 
                 <div class="work-card">
                     <div class="work-img-wrapper">
                         <img id="main-img-${work.id}" src="${work.title}_全貌.jpg">
+                    </div>
+                    <div class="trigger-container">
                         <div class="circle-toggle-trigger" onclick="toggleWorkContent(this)"><i class="fas fa-chevron-down arrow-icon"></i></div>
                     </div>
                     <div class="toggle-content">
@@ -172,9 +125,8 @@ h1 { font-size: 24px; font-weight: normal; margin-bottom: 60px; letter-spacing: 
     function toggleArtMenu(e) { e.stopPropagation(); document.getElementById('art-submenu').classList.toggle('open'); }
     function openSearch() { document.getElementById('searchOverlay').classList.add('open'); }
     function closeSearch() { document.getElementById('searchOverlay').classList.remove('open'); }
-    function toggleWorkContent(t) { t.classList.toggle('open'); t.closest('.work-card').querySelector('.toggle-content').classList.toggle('open'); }
+    function toggleWorkContent(t) { t.classList.toggle('open'); t.parentElement.nextElementSibling.classList.toggle('open'); }
     function switchImage(id, t) { document.getElementById(id).src = t.src; Array.from(t.parentNode.children).forEach(img => img.classList.remove('active')); t.classList.add('active'); }
 </script>
-
 </body>
 </html>
