@@ -6,116 +6,241 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>走過 - Pan Yu-Yang</title>
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
 <style>
 body {
     font-family: Helvetica, Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #73A97A; /* 🎨 換成指定的優雅灰綠色 */
-    color: #1c2e21;            /* 🎨 主要內文改成深墨綠色，在綠底上更清晰好讀 */
-    display: flex; 
+    background-color: #EBA697; /* 🎨 換成指定的甚三紅暖粉紅色調 */
+    color: #ffffff;            /* 🎨 內文採用清晰的白色 */
     min-height: 100vh;
+    overflow-x: hidden;
 }
 
-/* 左側側邊欄固定寬度與樣式 */
-.sidebar {
-    width: 260px;
-    padding: 60px 40px;
-    border-right: 1px solid #5d8e64; /* 🎨 邊框改成稍深的綠色線條，維持質感 */
-    position: fixed; 
-    height: 100vh;
+/* ==========================================
+   頂部導覽列 (位置絕對固定，不影響主內容)
+   ========================================== */
+.top-navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 30px 40px;
     box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
 }
 
-.sidebar h2 {
-    font-size: 22px;
-    font-weight: normal;
-    margin-bottom: 40px;
-    letter-spacing: 2px;
-    color: #1c2e21;
+.menu-toggle-btn {
+    font-size: 24px;
+    cursor: pointer;
+    transition: opacity 0.2s;
 }
+.menu-toggle-btn:hover { opacity: 0.7; }
+
+.search-toggle-btn {
+    font-size: 22px;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+.search-toggle-btn:hover { opacity: 0.7; }
+
+/* ==========================================
+   📐 浮空下拉式小側欄 panel（白底粉紅字）
+   ========================================== */
+.nav-panel {
+    position: fixed;
+    top: 70px;         
+    left: 40px;        
+    width: 150px;      
+    background-color: #ffffff; 
+    z-index: 90;
+    box-sizing: border-box;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); 
+    border-radius: 6px;
+    
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    padding: 0 20px;   
+    transition: max-height 0.35s ease-in-out, opacity 0.25s ease-in-out, padding 0.35s ease-in-out;
+}
+
+.nav-panel.open {
+    max-height: 450px; 
+    opacity: 1;
+    padding: 15px 20px; 
+}
+
+/* 🏠 最上方的「家」幾何符號樣式 */
+.home-icon-btn {
+    display: block;
+    text-align: center;
+    color: #EBA697;       /* 甚三紅粉紅色 */
+    font-size: 20px;
+    padding: 8px 0 12px 0;
+    border-bottom: 1px solid rgba(235, 166, 151, 0.2); /* 淡淡的粉紅分界線 */
+    text-decoration: none;
+    transition: opacity 0.2s;
+}
+.home-icon-btn:hover { opacity: 0.7; }
 
 .menu-item {
     display: block;
     text-decoration: none;
-    color: #1c2e21; 
-    font-size: 16px;
-    margin-bottom: 24px;
+    color: #EBA697;        /* 白底粉紅字 */
+    font-size: 15px;       
+    padding: 10px 0;
     cursor: pointer;
-    user-select: none;
+    letter-spacing: 3px;
+    border-bottom: none;   
 }
+.menu-item:hover { opacity: 0.7; }
 
-.menu-item:hover, .submenu-item:hover {
-    color: #f0f5f1; /* 🎨 滑鼠滑過選單時，呈現舒適的淡淡米白 */
-}
-
-/* 當前頁面（走過）的高亮樣式 */
+/* 目前身處的選單項目稍微加粗 */
 .menu-item.active {
-    color: #ffffff;
     font-weight: bold;
-    pointer-events: none;
 }
 
-/* 預設隱藏的子選單外殼 */
 .submenu {
-    margin-left: 15px;
-    border-left: 1px solid #5d8e64; /* 🎨 子選單左側線條改用深綠色 */
-    padding-left: 15px;
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.3s ease-out, margin-bottom 0.3s ease-out;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding-left: 10px;
+    margin-left: 2px;
+    border-left: 1px solid rgba(235, 166, 151, 0.3); 
+    transition: max-height 0.3s ease-in-out, margin-top 0.3s ease-in-out;
 }
-
-/* 當子選單被加上 .open 樣式時才會展開 */
 .submenu.open {
-    max-height: 100px; 
-    margin-bottom: 24px;
+    max-height: 100px;
+    margin-top: 8px;
+    margin-bottom: 8px;
 }
-
 .submenu-item {
-    display: block;
     text-decoration: none;
-    color: #43664a; /* 🎨 沒點到的系列名字使用中度深綠 */
-    font-size: 14px;
-    margin-bottom: 12px;
+    color: rgba(235, 166, 151, 0.7); 
+    font-size: 13px;       
+    letter-spacing: 2px;
 }
+.submenu-item:hover { color: #EBA697; } 
 
-.submenu-item.active {
-    color: #ffffff;
-    font-weight: bold;
-    pointer-events: none;
-}
-
-/* 右側主要內容區 */
-.main-content {
-    margin-left: 260px; 
-    padding: 60px 80px;
-    max-width: 900px; 
-    width: calc(100% - 260px);
+/* ==========================================
+   🔍 搜尋功能彈出視窗與結果顯示
+   ========================================== */
+.search-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.88); 
+    z-index: 300;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; 
+    align-items: center;
+    padding-top: 15vh;
     box-sizing: border-box;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+.search-overlay.open {
+    opacity: 1;
+    pointer-events: auto;
+}
+.close-search-btn {
+    position: absolute;
+    top: 30px;
+    right: 40px;
+    font-size: 26px;
+    cursor: pointer;
+    color: #fff;
+}
+.search-box {
+    width: 80%;
+    max-width: 500px;
+    text-align: center;
+}
+.search-input {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid #ffffff;
+    padding: 10px;
+    color: #ffffff;
+    font-size: 22px;
+    outline: none;
+    letter-spacing: 2px;
+    text-align: center;
+}
+.search-results {
+    width: 80%;
+    max-width: 500px;
+    margin-top: 30px;
+    max-height: 50vh;
+    overflow-y: auto;
+    text-align: left;
+}
+.result-item {
+    display: block;
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 15px 20px;
+    margin-bottom: 12px;
+    border-radius: 6px;
+    text-decoration: none;
+    color: #ffffff;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+.result-item:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+.result-title {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #EBA697; /* 搜尋結果的標題呼應粉紅色 */
+}
+.result-desc {
+    font-size: 13px;
+    color: #cccccc;
+    letter-spacing: 1px;
+}
+.no-result {
+    text-align: center;
+    color: #aaaaaa;
+    font-size: 14px;
+    margin-top: 20px;
+}
+
+/* ==========================================
+   📄 中央履歷主要內容區
+   ========================================== */
+.main-content {
+    padding: 140px 40px 80px 40px;
+    box-sizing: border-box;
+    max-width: 800px; 
+    margin: 0 auto; /* 居中對齊 */
+    position: relative;
+    z-index: 10; 
 }
 
 h1 {
-    font-size: 24px;
-    font-weight: normal;
-    margin-bottom: 40px;
-    letter-spacing: 2px;
-    color: #ffffff; /* 🎨 標題維持純白，非常大氣醒目 */
-}
-
-/* 個人照樣式區 */
-.profile-container {
+    font-size: 32px;
+    font-weight: 300;
     margin-bottom: 50px;
+    letter-spacing: 4px;
+    color: #ffffff; 
+    text-align: left;
 }
 
-.profile-img {
-    width: 180px;         
-    height: auto;
-    border: 1px solid #5d8e64; /* 🎨 照片邊框改用深綠色細線 */
-    display: block;
-}
-
-/* 履歷區塊樣式 */
 .resume-section {
     margin-bottom: 50px;
 }
@@ -123,22 +248,21 @@ h1 {
 .section-title {
     font-size: 18px;
     font-weight: normal;
-    color: #ffffff; /* 🎨 區塊大標題改用白色凸顯 */
-    border-bottom: 1px solid #5d8e64; /* 🎨 分隔線改用質感深綠色 */
+    color: #ffffff; 
+    border-bottom: 1px solid rgba(255, 255, 255, 0.4); 
     padding-bottom: 10px;
-    margin-bottom: 20px;
-    letter-spacing: 1px;
+    margin-bottom: 25px;
+    letter-spacing: 2px;
 }
 
 .sub-section-title {
     font-size: 15px;
     font-weight: bold;
-    color: #ffffff; /* 🎨 個展/聯展小標題改用白色，看得更清楚 */
-    margin: 25px 0 10px 0;
+    color: #ffffff; 
+    margin: 30px 0 12px 0;
     letter-spacing: 1px;
 }
 
-/* 經歷列表樣式 */
 .info-list {
     list-style: none;
     padding: 0;
@@ -148,16 +272,15 @@ h1 {
 .info-item {
     font-size: 14px;
     line-height: 1.8;
-    color: #1c2e21; /* 🎨 內文改用清晰的深墨綠 */
-    margin-bottom: 8px;
+    color: rgba(255, 255, 255, 0.9); 
+    margin-bottom: 12px;
     display: flex; 
 }
 
-/* 年份區塊固定寬度 */
 .info-year {
     width: 90px;
     flex-shrink: 0;
-    color: #ffffff; /* 🎨 年份在綠底上用純白標記，非常清晰 */
+    color: #ffffff; 
     font-weight: bold;
 }
 
@@ -165,68 +288,37 @@ h1 {
     flex-grow: 1;
 }
 
-/* 📱 智慧型手機版排版修正 */
+/* 📱 手機版適應調整 */
 @media (max-width: 768px) {
-    body {
-        flex-direction: column;
-    }
-
-    .sidebar {
-        position: relative;
-        width: 100%;
-        height: auto;
-        padding: 30px 20px;
-        border-right: none;
-        border-bottom: 1px solid #5d8e64;
-    }
-
-    .sidebar h2 {
-        margin-bottom: 20px;
-    }
-
-    .main-content {
-        margin-left: 0;
-        width: 100%;
-        padding: 40px 20px;
-    }
-
-    h1 {
-        margin-bottom: 30px;
-    }
-
-    .profile-container {
-        display: flex;
-        justify-content: center;
-        margin-bottom: 40px;
-    }
-
-    .info-item {
-        margin-bottom: 10px;
-    }
-
-    .info-year {
-        width: 70px; /* 稍微撐寬一點點以防純白字重疊 */
-        font-size: 13px;
-    }
-    
-    .resume-section:nth-of-type(1) .info-year {
-        width: 85px;
-    }
-
-    .info-text {
-        font-size: 13px;
-    }
+    .top-navbar { padding: 25px 25px; }
+    .nav-panel { left: 25px; top: 65px; } 
+    .close-search-btn { right: 25px; top: 25px; }
+    .main-content { padding: 120px 25px 60px 25px; }
+    h1 { font-size: 28px; margin-bottom: 40px; }
+    .info-item { flex-direction: column; margin-bottom: 16px; }
+    .info-year { margin-bottom: 2px; }
 }
 </style>
 </head>
 
 <body>
 
-<nav class="sidebar">
-    <h2>Pan Yu-Yang</h2>
+<header class="top-navbar">
+    <div class="menu-toggle-btn" onclick="toggleMenu()">
+        <i class="fas fa-bars"></i>
+    </div>
+    <div class="search-toggle-btn" onclick="openSearch()">
+        <i class="fas fa-search"></i>
+    </div>
+</header>
+
+<nav class="nav-panel" id="navPanel">
+    <a href="index.html" class="home-icon-btn" title="回首頁">
+        <i class="fas fa-home"></i>
+    </a>
     <a href="about.html" class="menu-item active">走過</a>
     
-    <span class="menu-item" onclick="toggleArtMenu()">畫過</span>
+    <span class="menu-item" onclick="toggleArtMenu(event)">畫過</span>
     <div class="submenu" id="art-submenu">
         <a href="genealogy.html" class="submenu-item">族譜系列</a>
         <a href="pseudo-classic.html" class="submenu-item">擬古系列</a>
@@ -235,13 +327,19 @@ h1 {
     <a href="writing.html" class="menu-item">寫過</a>
 </nav>
 
+<div class="search-overlay" id="searchOverlay">
+    <div class="close-search-btn" onclick="closeSearch()">
+        <i class="fas fa-times"></i>
+    </div>
+    <div class="search-box">
+        <input type="text" class="search-input" id="searchInput" placeholder="輸入關鍵字搜尋作品資訊..." oninput="performSearch()">
+    </div>
+    <div class="search-results" id="searchResults"></div>
+</div>
+
 <main class="main-content">
 
-    <h1>走過</h1>    
-
-    <div class="profile-container">
-        <img class="profile-img" src="個人照_彩色.jpg" alt="Pan Yu-Yang 個人照">
-    </div>
+    <h1>CV</h1>    
 
     <section class="resume-section">
         <div class="section-title">學歷</div>
@@ -335,10 +433,70 @@ h1 {
 </main>
 
 <script>
-// 控制「畫過」選單展開收合的 Script
-function toggleArtMenu() {
+// ==========================================
+// 📦 網站搜尋資料庫（已與首頁引擎同步並支援直接跳轉）
+// ==========================================
+const websiteData = [
+    { title: "關於我 (CV)", desc: "潘羽鍚的個人簡介、藝術理念與生命經歷。", url: "about.html" },
+    { title: "族譜系列", desc: "當代水墨與藝術創作——探索家族、血緣符號與記憶重組的作品單元。", url: "genealogy.html" },
+    { title: "擬古系列", desc: "傳統水墨美學的現代轉譯與模擬經典之筆墨實驗作品。", url: "pseudo-classic.html" },
+    { title: "文字創作 (寫過)", desc: "收錄潘羽鍚撰寫的藝術評論、散文、隨筆與文學創作。", url: "writing.html" },
+    // 在這裡你可以隨時追加具體作品：
+    { title: "七仙女圖", desc: "族譜系列作品。探討當代語境下的符號重組與水墨設色創作。", url: "genealogy.html" }
+];
+
+function toggleMenu() {
+    var panel = document.getElementById('navPanel');
+    panel.classList.toggle('open');
+}
+
+function toggleArtMenu(event) {
+    event.stopPropagation(); 
     var submenu = document.getElementById('art-submenu');
     submenu.classList.toggle('open');
+}
+
+function openSearch() {
+    document.getElementById('searchOverlay').classList.add('open');
+    document.getElementById('searchInput').value = ""; 
+    document.getElementById('searchResults').innerHTML = ""; 
+    setTimeout(() => {
+        document.getElementById('searchInput').focus();
+    }, 100);
+}
+
+function closeSearch() {
+    document.getElementById('searchOverlay').classList.remove('open');
+}
+
+function performSearch() {
+    const query = document.getElementById('searchInput').value.trim().toLowerCase();
+    const resultsContainer = document.getElementById('searchResults');
+    
+    if (query === "") {
+        resultsContainer.innerHTML = "";
+        return;
+    }
+    
+    const filteredData = websiteData.filter(item => 
+        item.title.toLowerCase().includes(query) || 
+        item.desc.toLowerCase().includes(query)
+    );
+    
+    if (filteredData.length > 0) {
+        let htmlContent = "";
+        filteredData.forEach(item => {
+            htmlContent += `
+                <a href="${item.url}" class="result-item">
+                    <div class="result-title">${item.title}</div>
+                    <div class="result-desc">${item.desc}</div>
+                </a>
+            `;
+        });
+        resultsContainer.innerHTML = htmlContent;
+    } else {
+        resultsContainer.innerHTML = `<div class="no-result">找不到與「${query}」相符的作品或資訊</div>`;
+    }
 }
 </script>
 
