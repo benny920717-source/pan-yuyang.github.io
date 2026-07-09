@@ -6,7 +6,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Pan Yu-Yang</title>
 
-<!-- 引入圖標庫（包含搜尋符號、IG、信箱、關閉等小圖示） -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
 <style>
@@ -14,7 +13,7 @@ body {
     font-family: Helvetica, Arial, sans-serif;
     margin: 0;
     padding: 0;
-    /* 💡 使用你指定的草綠色作為背景，文字改為白色（或可改深灰，白色目前最具極簡感） */
+    /* 使用你指定的草綠色作為背景 */
     background-color: #86c166; 
     color: #ffffff;            
     min-height: 100vh;
@@ -54,15 +53,15 @@ body {
 .search-toggle-btn:hover { opacity: 0.7; }
 
 /* ==========================================
-   🍔 點開後才會顯示的全螢幕選單 (Overlay)
+   全螢幕選單 (Overlay)
    ========================================== */
 .nav-overlay {
     position: fixed;
     top: 0;
-    left: -100%; /* 預設藏在左邊外面 */
+    left: -100%; 
     width: 100%;
     height: 100vh;
-    background-color: rgba(134, 193, 102, 0.98); /* 覆蓋半透明的同款綠色 */
+    background-color: rgba(134, 193, 102, 0.98); 
     z-index: 200;
     display: flex;
     flex-direction: column;
@@ -124,7 +123,7 @@ body {
 .submenu-item:hover { color: #ffffff; }
 
 /* ==========================================
-   🔍 搜尋功能彈出視窗 (Modal)
+   搜尋功能彈出視窗 (Modal)
    ========================================== */
 .search-overlay {
     position: fixed;
@@ -132,7 +131,7 @@ body {
     left: 0;
     width: 100%;
     height: 100vh;
-    background-color: rgba(0, 0, 0, 0.85); /* 搜尋時背景變暗，焦點集中 */
+    background-color: rgba(0, 0, 0, 0.85); 
     z-index: 300;
     display: flex;
     flex-direction: column;
@@ -175,7 +174,7 @@ body {
 }
 
 /* ==========================================
-   🖼️ 中央主要內容區 (無側欄、完全置中)
+   🖼️ 中央主要內容區
    ========================================== */
 .main-content {
     padding: 120px 20px 60px 20px;
@@ -205,7 +204,7 @@ body {
 /* 個人照顯示容器 */
 .profile-img-wrapper {
     width: 100%;
-    max-width: 260px;       /* 質感大小比例 */
+    max-width: 200px;       /* ✨ 電腦版照片微調縮小為 200px，比例更精緻精美 */
     margin-bottom: 45px;
     display: flex;
     justify-content: center;
@@ -228,7 +227,7 @@ body {
 .circle-btn {
     width: 40px;            
     height: 40px;
-    background-color: rgba(255, 255, 255, 0.2); /* 綠色背景配上半透明白底圈圈，極有質感 */
+    background-color: rgba(255, 255, 255, 0.2); 
     border-radius: 50%;
     display: flex;
     justify-content: center;
@@ -251,29 +250,25 @@ body {
     .close-search-btn { right: 25px; top: 25px; }
     .profile-name-en { font-size: 24px; }
     .profile-name-zh { font-size: 18px; }
-    .profile-img-wrapper { max-width: 180px; } 
+    .profile-img-wrapper { max-width: 180px; } /* 📱 手機版維持原本的 180px 不變 */
 }
 </style>
 </head>
 
 <body>
 
-<!-- 頂部導覽列 -->
 <header class="top-navbar">
-    <!-- 左上角三條小橫杠 -->
     <div class="menu-toggle-btn" onclick="openMenu()">
         <i class="fas fa-bars"></i>
     </div>
-    <!-- 右上角搜尋符號 -->
     <div class="search-toggle-btn" onclick="openSearch()">
         <i class="fas fa-search"></i>
     </div>
 </header>
 
-<!-- 彈出式全螢幕選單 -->
 <nav class="nav-overlay" id="navOverlay">
     <div class="close-menu-btn" onclick="closeMenu()">
-        <i class="fas fa-times"></i> <!-- 變回打叉符號 -->
+        <i class="fas fa-times"></i> 
     </div>
     <div class="overlay-menu">
         <a href="about.html" class="menu-item">走過</a>
@@ -288,18 +283,15 @@ body {
     </div>
 </nav>
 
-<!-- 彈出式搜尋視窗 -->
 <div class="search-overlay" id="searchOverlay">
     <div class="close-search-btn" onclick="closeSearch()">
         <i class="fas fa-times"></i>
     </div>
     <div class="search-box">
-        <!-- 💡 搜尋輸入框，未來可串接搜尋功能 -->
         <input type="text" class="search-input" placeholder="輸入關鍵字搜尋作品資訊..." onkeypress="handleSearch(event)">
     </div>
 </div>
 
-<!-- 主要內容區 -->
 <main class="main-content">
 
     <div class="profile-name-en">Pan Yu Yang</div>
@@ -325,9 +317,10 @@ body {
 function openMenu() {
     document.getElementById('navOverlay').classList.add('open');
 }
+// 關閉選單時順便收合子選單
 function closeMenu() {
     document.getElementById('navOverlay').classList.remove('open');
-    document.getElementById('art-submenu').classList.remove('open'); // 關閉選單時順便收合子選單
+    document.getElementById('art-submenu').classList.remove('open'); 
 }
 
 // 控制畫過子選單的展開
@@ -340,7 +333,6 @@ function toggleArtMenu(event) {
 // 控制搜尋視窗的開關
 function openSearch() {
     document.getElementById('searchOverlay').classList.add('open');
-    // 自動讓輸入框取得焦點
     setTimeout(() => {
         document.querySelector('.search-input').focus();
     }, 100);
