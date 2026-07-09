@@ -13,7 +13,7 @@ body {
     font-family: Helvetica, Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #EBA697; /* 🎨 換成指定的甚三紅暖粉紅色調 */
+    background-color: rgb(235, 122, 119); /* 🎨 換成指定的甚三紅 R:235, G:122, B:119 */
     color: #ffffff;            /* 🎨 內文採用清晰的白色 */
     min-height: 100vh;
     overflow-x: hidden;
@@ -79,11 +79,10 @@ body {
 /* 🏠 最上方的「家」幾何符號樣式 */
 .home-icon-btn {
     display: block;
-    text-align: center;
-    color: #EBA697;       /* 甚三紅粉紅色 */
-    font-size: 20px;
-    padding: 8px 0 12px 0;
-    border-bottom: 1px solid rgba(235, 166, 151, 0.2); /* 淡淡的粉紅分界線 */
+    text-align: left;         /* 🎨 修改：靠左對齊，與下方文字切齊 */
+    color: rgb(235, 122, 119); /* 🎨 更新為指定底色 */
+    font-size: 18px;
+    padding: 10px 0;          /* 調整間距使其與下方項目看起來更和諧 */
     text-decoration: none;
     transition: opacity 0.2s;
 }
@@ -92,7 +91,7 @@ body {
 .menu-item {
     display: block;
     text-decoration: none;
-    color: #EBA697;        /* 白底粉紅字 */
+    color: rgb(235, 122, 119); /* 🎨 更新為指定底色 */
     font-size: 15px;       
     padding: 10px 0;
     cursor: pointer;
@@ -114,7 +113,7 @@ body {
     gap: 12px;
     padding-left: 10px;
     margin-left: 2px;
-    border-left: 1px solid rgba(235, 166, 151, 0.3); 
+    border-left: 1px solid rgba(235, 122, 119, 0.3); 
     transition: max-height 0.3s ease-in-out, margin-top 0.3s ease-in-out;
 }
 .submenu.open {
@@ -124,11 +123,11 @@ body {
 }
 .submenu-item {
     text-decoration: none;
-    color: rgba(235, 166, 151, 0.7); 
+    color: rgba(235, 122, 119, 0.7); 
     font-size: 13px;       
     letter-spacing: 2px;
 }
-.submenu-item:hover { color: #EBA697; } 
+.submenu-item:hover { color: rgb(235, 122, 119); } 
 
 /* ==========================================
    🔍 搜尋功能彈出視窗與結果顯示
@@ -206,7 +205,7 @@ body {
     font-size: 16px;
     font-weight: bold;
     margin-bottom: 5px;
-    color: #EBA697; /* 搜尋結果的標題呼應粉紅色 */
+    color: rgb(235, 122, 119); /* 🎨 搜尋結果的標題呼應新底色 */
 }
 .result-desc {
     font-size: 13px;
@@ -360,7 +359,7 @@ h1 {
             <li class="info-item"><span class="info-year">2024</span><span class="info-text">《失眠斷片腹稿》第三集，台北市：個人出版。</span></li>
             <li class="info-item"><span class="info-year"></span><span class="info-text">《新竹藝術家叢書：謝鴻均》，新竹市：新竹市政府文化局。</span></li>
             <li class="info-item"><span class="info-year">2023</span><span class="info-text">《失眠斷片腹稿》第二集，台北市：個人出版。</span></li>
-            <li class="info-item"><span class="info-year"></span><span class="info-text">《失眠斷片腹稿》第一集，台北市：個人出版。</span></li>
+            <li class="info-item"><span class="info-year"></span><span class="info-text">《失眠斷片腹稿>第一集，台北市：個人出版。</span></li>
             <li class="info-item"><span class="info-year">2018</span><span class="info-text">《煩惱交換平台》（繪圖），台北市：臺北市政府教育局。</span></li>
         </ul>
     </section>
@@ -441,19 +440,50 @@ const websiteData = [
     { title: "族譜系列", desc: "當代水墨與藝術創作——探索家族、血緣符號與記憶重組的作品單元。", url: "genealogy.html" },
     { title: "擬古系列", desc: "傳統水墨美學的現代轉譯與模擬經典之筆墨實驗作品。", url: "pseudo-classic.html" },
     { title: "文字創作 (寫過)", desc: "收錄潘羽鍚撰寫的藝術評論、散文、隨筆與文學創作。", url: "writing.html" },
-    // 在這裡你可以隨時追加具體作品：
     { title: "七仙女圖", desc: "族譜系列作品。探討當代語境下的符號重組與水墨設色創作。", url: "genealogy.html" }
 ];
+
+// ⏳ 宣告計時器全域變數
+let autoCloseTimer = null;
 
 function toggleMenu() {
     var panel = document.getElementById('navPanel');
     panel.classList.toggle('open');
+    
+    // 如果打開選單，啟動 5 秒倒數
+    if (panel.classList.contains('open')) {
+        resetAutoCloseTimer();
+    } else {
+        clearAutoCloseTimer();
+    }
+}
+
+// ⏳ 啟動或重設 5 秒自動收合功能
+function resetAutoCloseTimer() {
+    clearAutoCloseTimer(); // 移除舊的計時器
+    autoCloseTimer = setTimeout(function() {
+        var panel = document.getElementById('navPanel');
+        if (panel.classList.contains('open')) {
+            panel.classList.remove('open');
+        }
+    }, 5000); // 5000 毫秒 = 5 秒
+}
+
+// 清除計時器
+function clearAutoCloseTimer() {
+    if (autoCloseTimer) {
+        clearTimeout(autoCloseTimer);
+        autoCloseTimer = null;
+    }
 }
 
 function toggleArtMenu(event) {
     event.stopPropagation(); 
     var submenu = document.getElementById('art-submenu');
     submenu.classList.toggle('open');
+    
+    // 💡 點擊展開子選單時，重新拉長 5 秒計時，避免點到一半突然縮回去
+    resetAutoCloseTimer();
 }
 
 function openSearch() {
