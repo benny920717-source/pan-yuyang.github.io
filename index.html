@@ -6,6 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Pan Yu-Yang</title>
 
+<!-- 引入圖標庫，讓底部的圓形按鈕內顯示漂亮的 IG 和 信箱圖示 -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
 <style>
@@ -83,7 +84,7 @@ body {
 }
 
 /* ==========================================
-   🎨 修改後的右側主要內容區（改造成置中傳送門版面）
+   🎨 修改後的右側主要內容區（改造成更具留白美感的比例）
    ========================================== */
 .main-content {
     margin-left: 260px; 
@@ -99,24 +100,24 @@ body {
 
 /* 頂部兩行姓名樣式 */
 .profile-name-en {
-    font-size: 32px;
+    font-size: 28px;        /* 微調字型大小更顯秀氣 */
     letter-spacing: 2px;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
     font-weight: 300;
 }
 
 .profile-name-zh {
-    font-size: 24px;
+    font-size: 20px;
     letter-spacing: 6px;
-    margin-bottom: 40px;
+    margin-bottom: 35px;    /* 微調間距 */
     font-weight: 400;
 }
 
-/* 個人照顯示容器 */
+/* 個人照顯示容器（縮小成更精緻的質感比例） */
 .profile-img-wrapper {
     width: 100%;
-    max-width: 420px; /* 限制照片在電腦版上的最大寬度 */
-    margin-bottom: 50px;
+    max-width: 260px;       /* ✨ 電腦版縮小為 260px，讓畫面整體更輕盈有質感 */
+    margin-bottom: 45px;
     display: flex;
     justify-content: center;
 }
@@ -131,27 +132,27 @@ body {
 /* 社群按鈕容器 */
 .social-buttons {
     display: flex;
-    gap: 20px; /* 兩個圓圈按鈕之間的距離 */
+    gap: 24px;              /* 稍微拉開圓圈之間的間隔 */
 }
 
 /* 雙圓形按鈕樣式 */
 .circle-btn {
-    width: 44px;
-    height: 44px;
-    background-color: #333333; /* 圓圈暗色底色，與深色背景呼應 */
+    width: 40px;            /* 按鈕也等比例修細緻一點 */
+    height: 40px;
+    background-color: #262626; /* 使用更有質感的暗灰底色 */
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
     color: #ffffff;
     text-decoration: none;
-    font-size: 20px;
+    font-size: 18px;
     transition: background-color 0.2s ease, transform 0.2s ease;
 }
 
 .circle-btn:hover {
-    background-color: #555555; /* 滑鼠滑過時稍微變亮 */
-    transform: scale(1.05);     /* 微微放大 */
+    background-color: #444444; 
+    transform: scale(1.05);     
 }
 
 /* 📱 手機版排版修正 */
@@ -177,12 +178,12 @@ body {
         margin-left: 0;
         width: 100%;
         padding: 60px 20px;
-        min-height: calc(100vh - 200px); /* 扣掉手機版選單高度後的置中範圍 */
+        min-height: calc(100vh - 200px); 
     }
 
-    .profile-name-en { font-size: 28px; }
-    .profile-name-zh { font-size: 20px; }
-    .profile-img-wrapper { max-width: 280px; } /* 手機版照片適度縮小 */
+    .profile-name-en { font-size: 24px; }
+    .profile-name-zh { font-size: 18px; }
+    .profile-img-wrapper { max-width: 180px; } /* ✨ 手機版同步縮小為 180px */
 }
 </style>
 </head>
@@ -204,17 +205,22 @@ body {
 
 <main class="main-content">
 
+    <!-- 1️⃣ 兩行姓名 -->
     <div class="profile-name-en">Pan Yu Yang</div>
     <div class="profile-name-zh">潘羽鍚</div>
 
+    <!-- 2️⃣ 中央指定名稱的個人照路徑 -->
     <div class="profile-img-wrapper">
         <img src="個人照_彩色.jpg" alt="潘羽鍚 Pan Yu Yang">
     </div>
 
+    <!-- 3️⃣ 最底部的雙圓形按鈕（左邊 IG，右邊信箱） -->
     <div class="social-buttons">
+        <!-- IG 圓形按鈕 -->
         <a href="https://www.instagram.com/bennypan920717/" target="_blank" class="circle-btn" title="Instagram">
             <i class="fab fa-instagram"></i>
         </a>
+        <!-- 信箱 圓形按鈕 -->
         <a href="mailto:benny920717@gmail.com" class="circle-btn" title="Email">
             <i class="far fa-envelope"></i>
         </a>
