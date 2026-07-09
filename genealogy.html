@@ -10,418 +10,54 @@
 
 <style>
 body {
-    font-family: Helvetica, Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #268785; /* 🎨 青碧藍綠色底色 */
-    color: #ffffff;            
-    min-height: 100vh;
-    overflow-x: hidden;
+    font-family: Helvetica, Arial, sans-serif; margin: 0; padding: 0; background-color: #268785; color: #ffffff; min-height: 100vh; overflow-x: hidden;
 }
 
-/* ==========================================
-   頂部導覽列 (位置絕對固定，包含左漢堡、右搜尋)
-   ========================================== */
-.top-navbar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    padding: 30px 40px;
-    box-sizing: border-box;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    z-index: 100;
-}
+/* 導覽列與側欄 */
+.top-navbar { position: fixed; top: 0; left: 0; width: 100%; padding: 30px 40px; box-sizing: border-box; display: flex; justify-content: space-between; align-items: center; z-index: 100; }
+.menu-toggle-btn, .search-toggle-btn { font-size: 24px; cursor: pointer; color: #ffffff; transition: opacity 0.2s; }
+.menu-toggle-btn:hover, .search-toggle-btn:hover { opacity: 0.7; }
 
-.menu-toggle-btn {
-    font-size: 24px;
-    cursor: pointer;
-    transition: opacity 0.2s;
-    color: #ffffff;
+.nav-panel { 
+    position: fixed; top: 70px; left: 40px; width: 150px; background-color: #ffffff; 
+    z-index: 90; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); border-radius: 6px; 
+    max-height: 0; overflow: hidden; opacity: 0; padding: 0 20px; 
+    transition: all 0.35s ease-in-out; 
 }
-.menu-toggle-btn:hover { opacity: 0.7; }
+.nav-panel.open { max-height: 470px; opacity: 1; padding: 15px 20px; }
 
-.search-toggle-btn {
-    font-size: 22px;
-    cursor: pointer;
-    transition: opacity 0.2s;
-    color: #ffffff;
+/* 🏠 修正後的房子符號樣式 (18px) */
+.home-icon-btn {
+    display: flex; justify-content: flex-start; align-items: center;
+    color: #268785; font-size: 18px; padding: 12px 0 12px 0; text-decoration: none;
+    width: 100%; margin-bottom: 5px; transition: opacity 0.2s;
 }
-.search-toggle-btn:hover { opacity: 0.7; }
+.home-icon-btn:hover { opacity: 0.7; }
 
-/* ==========================================
-   📐 浮空下拉式小側欄 panel（白底綠字）
-   ========================================== */
-.nav-panel {
-    position: fixed;
-    top: 70px;         
-    left: 40px;        
-    width: 150px;      
-    background-color: #ffffff; 
-    z-index: 90;
-    box-sizing: border-box;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); 
-    border-radius: 6px;
-    
-    max-height: 0;
-    overflow: hidden;
-    opacity: 0;
-    padding: 0 20px;   
-    transition: max-height 0.35s ease-in-out, opacity 0.25s ease-in-out, padding 0.35s ease-in-out;
-}
+.menu-item { display: block; text-decoration: none; color: #268785; font-size: 15px; padding: 10px 0; cursor: pointer; letter-spacing: 3px; }
+.submenu { max-height: 0; overflow: hidden; display: flex; flex-direction: column; gap: 12px; padding-left: 10px; margin-left: 2px; border-left: 1px solid rgba(38, 135, 133, 0.3); transition: max-height 0.3s ease-in-out; }
+.submenu.open { max-height: 100px; margin-top: 8px; margin-bottom: 8px; }
+.submenu-item { display: block; text-decoration: none; color: rgba(38, 135, 133, 0.7); font-size: 13px; letter-spacing: 2px; }
+.submenu-item.active { color: #268785; font-weight: bold; pointer-events: none; }
 
-.nav-panel.open {
-    max-height: 470px; 
-    opacity: 1;
-    padding: 24px 20px 20px 20px; 
-}
+/* 內容區 */
+.main-content { margin: 0 auto; padding: 120px 40px 60px 40px; max-width: 900px; }
+h1 { font-size: 24px; text-align: center; margin-bottom: 60px; letter-spacing: 2px; color: #ffffff; }
+.work-card { margin-bottom: 140px; position: relative; }
+.work-img-wrapper { height: 650px; display: flex; justify-content: center; align-items: center; background-color: #268785; }
+.work-img-wrapper img { max-width: 100%; max-height: 100%; object-fit: contain; }
+.circle-toggle-trigger { position: absolute; bottom: -20px; left: 50%; transform: translateX(-50%); width: 44px; height: 44px; background-color: rgba(0,0,0,0.25); border-radius: 50%; display: flex; justify-content: center; align-items: center; cursor: pointer; z-index: 10; }
+.toggle-content { max-height: 0; overflow: hidden; transition: all 0.45s ease-in-out; opacity: 0; }
+.toggle-content.open { max-height: 900px; opacity: 1; padding-top: 25px; }
+.work-meta { font-size: 15px; font-weight: bold; margin-bottom: 14px; }
+.work-seal { font-size: 14px; line-height: 1.8; color: #e0f2f1; white-space: pre-line; margin-bottom: 25px; }
+.thumb-img { width: 80px; height: 80px; object-fit: cover; cursor: pointer; border: 1px solid #1d6664; opacity: 0.5; margin: 5px; }
+.thumb-img.active { opacity: 1; border-color: #ffffff; }
 
-/* 側欄選單項目樣式 */
-.menu-item {
-    display: block;
-    text-decoration: none;
-    color: #268785; 
-    font-size: 15px;       
-    padding: 10px 0;
-    cursor: pointer;
-    letter-spacing: 3px;
-    text-align: left; 
-}
-.menu-item:hover { opacity: 0.7; }
-
-/* 🏠 「家的符號」與下方「走過」之間的距離 */
-.home-link-item {
-    padding-top: 4px;      
-    padding-bottom: 12px;  
-}
-.home-link-item .fa-home {
-    font-size: 20px;      
-    color: #268785;
-}
-
-.submenu {
-    max-height: 0;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    padding-left: 10px;
-    margin-left: 2px;
-    border-left: 1px solid rgba(38, 135, 133, 0.3); 
-    transition: max-height 0.3s ease-in-out, margin-top 0.3s ease-in-out;
-}
-.submenu.open {
-    max-height: 100px;
-    margin-top: 8px;
-    margin-bottom: 8px;
-}
-.submenu-item {
-    display: block;
-    text-decoration: none;
-    color: rgba(38, 135, 133, 0.7); 
-    font-size: 13px;       
-    letter-spacing: 2px;
-    text-align: left;
-}
-.submenu-item:hover { color: #268785; } 
-
-.submenu-item.active {
-    color: #268785;
-    font-weight: bold;
-    pointer-events: none;
-}
-
-/* ==========================================
-   🔍 全螢幕搜尋功能視窗
-   ========================================== */
-.search-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.88); 
-    z-index: 300;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start; 
-    align-items: center;
-    padding-top: 15vh; 
-    box-sizing: border-box;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.3s ease;
-}
-.search-overlay.open {
-    opacity: 1;
-    pointer-events: auto;
-}
-.close-search-btn {
-    position: absolute;
-    top: 30px;
-    right: 40px;
-    font-size: 26px;
-    cursor: pointer;
-    color: #fff;
-}
-.search-box {
-    width: 80%;
-    max-width: 500px;
-    text-align: center;
-}
-.search-input {
-    width: 100%;
-    background: transparent;
-    border: none;
-    border-bottom: 2px solid #ffffff;
-    padding: 10px;
-    color: #ffffff;
-    font-size: 22px;
-    outline: none;
-    letter-spacing: 2px;
-    text-align: center;
-}
-
-.search-results {
-    width: 80%;
-    max-width: 500px;
-    margin-top: 30px;
-    max-height: 50vh;
-    overflow-y: auto;
-    text-align: left;
-}
-.result-item {
-    display: block;
-    background-color: rgba(255, 255, 255, 0.1);
-    padding: 15px 20px;
-    margin-bottom: 12px;
-    border-radius: 6px;
-    text-decoration: none;
-    color: #ffffff;
-    transition: background-color 0.2s ease, transform 0.2s ease;
-}
-.result-item:hover {
-    background-color: rgba(255, 255, 255, 0.2);
-    transform: translateY(-2px); 
-}
-.result-title {
-    font-size: 16px;
-    font-weight: bold;
-    margin-bottom: 5px;
-    color: #b2dbda;
-}
-.result-desc {
-    font-size: 13px;
-    color: #cccccc;
-    letter-spacing: 1px;
-}
-.no-result {
-    text-align: center;
-    color: #aaaaaa;
-    font-size: 14px;
-    margin-top: 20px;
-}
-
-/* ==========================================
-   🖼️ 主要內容區
-   ========================================== */
-.main-content {
-    margin-left: auto;
-    margin-right: auto;
-    padding: 120px 40px 60px 40px; 
-    max-width: 900px;  
-    width: 100%;
-    box-sizing: border-box;
-}
-
-/* 🛠️ 修改處：將大標題「族譜系列」改為置中對齊 */
-h1 {
-    font-size: 24px;
-    font-weight: normal;
-    margin-bottom: 60px;
-    letter-spacing: 2px;
-    color: #ffffff;
-    text-align: center; /* 讓文字在頁面最上方置中 */
-}
-
-/* 獨立的作品外殼 */
-.work-card {
-    display: block;
-    width: 100%;
-    margin-bottom: 140px; 
-    position: relative;
-}
-
-/* 主圖外殼與顯示區域 */
-.work-img-container {
-    position: relative; 
-    width: 100%;
-    margin-bottom: 20px;
-}
-
-.work-img-wrapper {
-    width: 100%;
-    height: 650px;       
-    display: flex;
-    justify-content: center; 
-    align-items: center;     
-    background-color: #268785; 
-}
-
-/* 讓主圖完美縮放不變形 */
-.work-img-wrapper img {
-    width: 100%;
-    height: 100%;
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain; 
-    display: block;
-}
-
-/* ==========================================
-   🔘 🛠️ 修改處：微調半透明圓形資訊控制符號的透明度
-   ========================================== */
-.circle-toggle-trigger {
-    position: absolute;
-    bottom: -20px;       
-    left: 50%;
-    transform: translateX(-50%);
-    width: 44px;
-    height: 44px;
-    background-color: rgba(0, 0, 0, 0.25); /* 🛠️ 將本來的 0.5 調淡成 0.25，使其呈現更淡的半透明狀態 */
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    user-select: none;
-    z-index: 10;
-    transition: background-color 0.2s ease, bottom 0.3s ease;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-/* 滑鼠移上去時，可以稍微加深或保持淡雅 */
-.circle-toggle-trigger:hover {
-    background-color: rgba(0, 0, 0, 0.5); /* 懸停時略微顯現（可依喜好改為 0.3 或 0.4） */
-}
-
-/* 內部箭頭符號 */
-.circle-toggle-trigger .arrow-icon {
-    font-size: 16px;
-    color: #ffffff;
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* 當展開時，箭頭旋轉 180 度翻轉向上 */
-.circle-toggle-trigger.open .arrow-icon {
-    transform: rotate(180deg);
-}
-
-/* ==========================================
-   📦 總收納外殼（作品資訊＋局部放大圖全部藏在裡面）
-   ========================================== */
-.toggle-content {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.45s ease-in-out, opacity 0.4s ease; 
-    opacity: 0;
-    padding-top: 0;
-}
-
-/* 展開狀態 */
-.toggle-content.open {
-    max-height: 900px; 
-    opacity: 1;
-    padding-top: 25px; 
-}
-
-.details-content {
-    padding-top: 5px; 
-}
-
-/* 用於收納作品名與基本資訊 */
-.work-meta {
-    font-size: 15px;
-    font-weight: bold;
-    color: #ffffff;
-    margin-bottom: 14px;
-    letter-spacing: 1px;
-}
-
-.work-seal {
-    font-size: 14px;
-    line-height: 1.8;
-    color: #e0f2f1;            
-    white-space: pre-line; 
-    margin-bottom: 25px;
-}
-
-/* 縮圖控制列 */
-.thumb-container {
-    display: flex;
-    flex-wrap: wrap;     
-    gap: 12px;           
-    margin-top: 15px;    
-    margin-bottom: 10px; 
-    clear: both;
-}
-
-/* 單張小圖的樣式 */
-.thumb-img {
-    width: 80px;         
-    height: 80px;        
-    object-fit: cover;   
-    cursor: pointer;
-    border: 1px solid #1d6664;
-    opacity: 0.5;        
-    transition: all 0.2s ease;
-    flex-shrink: 0;      
-}
-
-.thumb-img:hover, .thumb-img.active {
-    opacity: 1;
-    border-color: #ffffff;
-}
-
-/* ==========================================
-   📱 手機版適適配調整
-   ========================================== */
 @media (max-width: 768px) {
-    .top-navbar { padding: 25px 25px; }
-    .nav-panel { left: 25px; top: 65px; } 
-    .close-search-btn { right: 25px; top: 25px; }
-
-    .main-content {
-        padding: 100px 20px 40px 20px;
-    }
-
-    h1 {
-        margin-bottom: 40px;
-    }
-
-    .work-img-wrapper {
-        height: 320px;       
-    }
-    
-    .work-card {
-        margin-bottom: 100px; 
-    }
-
-    .thumb-img {
-        width: 60px;
-        height: 60px;
-    }
-    
-    .circle-toggle-trigger {
-        width: 38px;
-        height: 38px;
-        bottom: -18px;
-    }
-    .circle-toggle-trigger .arrow-icon {
-        font-size: 14px;
-    }
+    .main-content { padding: 100px 20px 40px; }
+    .work-img-wrapper { height: 320px; }
+    .thumb-img { width: 60px; height: 60px; }
 }
 </style>
 </head>
@@ -429,61 +65,30 @@ h1 {
 <body>
 
 <header class="top-navbar">
-    <div class="menu-toggle-btn" onclick="toggleMenu()">
-        <i class="fas fa-bars"></i>
-    </div>
-    <div class="search-toggle-btn" onclick="openSearch()">
-        <i class="fas fa-search"></i>
-    </div>
+    <div class="menu-toggle-btn" onclick="toggleMenu()"><i class="fas fa-bars"></i></div>
+    <div class="search-toggle-btn" onclick="openSearch()"><i class="fas fa-search"></i></div>
 </header>
 
 <nav class="nav-panel" id="navPanel">
-    <a href="index.html" class="menu-item home-link-item">
-        <i class="fas fa-home"></i>
-    </a>
-    
+    <a href="index.html" class="home-icon-btn"><i class="fas fa-home"></i></a>
     <a href="about.html" class="menu-item">走過</a>
-    
     <span class="menu-item" onclick="toggleArtMenu(event)">畫過</span>
     <div class="submenu open" id="art-submenu">
         <a href="printmaking.html" class="submenu-item active">族譜系列</a>
         <a href="pseudo-classic.html" class="submenu-item">擬古系列</a>
     </div>
-    
     <a href="writing.html" class="menu-item">寫過</a>
 </nav>
 
-<div class="search-overlay" id="searchOverlay">
-    <div class="close-search-btn" onclick="closeSearch()">
-        <i class="fas fa-times"></i>
-    </div>
-    <div class="search-box">
-        <input type="text" class="search-input" id="searchInput" placeholder="輸入關鍵字搜尋作品資訊..." oninput="performSearch()">
-    </div>
-    <div class="search-results" id="searchResults"></div>
-</div>
-
 <main class="main-content">
-
-    <h1>族譜系列</h1>    
-
+    <h1>族譜系列</h1>
+    
     <div class="work-card">
-        <div class="work-img-container">
-            <div class="work-img-wrapper">
-                <img id="main-img-1" src="阿公的發財車_全貌.jpg">
-            </div>
-            
-            <div class="circle-toggle-trigger" onclick="toggleWorkContent(this)">
-                <i class="fas fa-chevron-down arrow-icon"></i>
-            </div>
-        </div>
-        
+        <div class="work-img-wrapper"><img id="main-img-1" src="阿公的發財車_全貌.jpg"></div>
+        <div class="circle-toggle-trigger" onclick="toggleWorkContent(this)"><i class="fas fa-chevron-down"></i></div>
         <div class="toggle-content">
-            <div class="details-content">
-                <div class="work-meta">阿公的發財車｜2019｜原子筆、黃素描紙｜39.4 × 54.6 cm</div>
-                <div class="work-seal">我的阿公是個農夫，他有一台發財車，載著他種的水果、蔬菜、米糧來來往往。我為這台車加上許多新功能，像是做爆米香、釀小米酒、製作米粉等等，這樣阿公就不用那麼辛苦下田了。</div>
-            </div>
-
+            <div class="work-meta">阿公的發財車｜2019｜原子筆、黃素描紙｜39.4 × 54.6 cm</div>
+            <div class="work-seal">我的阿公是個農夫，他有一台發財車，載著他種的水果、蔬菜、米糧來來往往。我為這台車加上許多新功能，像是做爆米香、釀小米酒、製作米粉等等，這樣阿公就不用那麼辛苦下田了。</div>
             <div class="thumb-container">
                 <img class="thumb-img active" src="阿公的發財車_全貌.jpg" onclick="switchImage('main-img-1', this)">
                 <img class="thumb-img" src="阿公的發財車_局部1.jpg" onclick="switchImage('main-img-1', this)">
@@ -495,22 +100,11 @@ h1 {
     </div>
 
     <div class="work-card">
-        <div class="work-img-container">
-            <div class="work-img-wrapper">
-                <img id="main-img-2" src="阿嬤是偉大的田莊人_全貌.jpg">
-            </div>
-            
-            <div class="circle-toggle-trigger" onclick="toggleWorkContent(this)">
-                <i class="fas fa-chevron-down arrow-icon"></i>
-            </div>
-        </div>
-        
+        <div class="work-img-wrapper"><img id="main-img-2" src="阿嬤是偉大的田莊人_全貌.jpg"></div>
+        <div class="circle-toggle-trigger" onclick="toggleWorkContent(this)"><i class="fas fa-chevron-down"></i></div>
         <div class="toggle-content">
-            <div class="details-content">
-                <div class="work-meta">阿嬤是偉大的田莊人｜2020｜原子筆、黃素描紙｜39.4 × 54.6 cm</div>
-                <div class="work-seal">我的阿嬤是個農婦，這幅畫描繪她的日常起居，比方做龍眼乾、曬米、網土芒果。多年前創作時，對鄉村十分嚮往，時常有意將其浪漫化、美化，想像阿嬤的生活是多麼幸福靜好。</div>
-            </div>
-
+            <div class="work-meta">阿嬤是偉大的田莊人｜2020｜原子筆、黃素描紙｜39.4 × 54.6 cm</div>
+            <div class="work-seal">我的阿嬤是個農婦，這幅畫描繪她的日常起居，比方做龍眼乾、曬米、網土芒果。多年前創作時，對鄉村十分嚮往，時常有意將其浪漫化、美化，想像阿嬤的生活是多麼幸福靜好。</div>
             <div class="thumb-container">
                 <img class="thumb-img active" src="阿嬤是偉大的田莊人_全貌.jpg" onclick="switchImage('main-img-2', this)">
                 <img class="thumb-img" src="阿嬤是偉大的田莊人_局部1.jpg" onclick="switchImage('main-img-2', this)">
@@ -522,22 +116,11 @@ h1 {
     </div>
 
     <div class="work-card">
-        <div class="work-img-container">
-            <div class="work-img-wrapper">
-                <img id="main-img-3" src="姐妹花_全貌.jpg">
-            </div>
-            
-            <div class="circle-toggle-trigger" onclick="toggleWorkContent(this)">
-                <i class="fas fa-chevron-down arrow-icon"></i>
-            </div>
-        </div>
-        
+        <div class="work-img-wrapper"><img id="main-img-3" src="姐妹花_全貌.jpg"></div>
+        <div class="circle-toggle-trigger" onclick="toggleWorkContent(this)"><i class="fas fa-chevron-down"></i></div>
         <div class="toggle-content">
-            <div class="details-content">
-                <div class="work-meta">姐妹花｜2021｜原子筆、黃素描紙｜39.4 × 54.6 cm</div>
-                <div class="work-seal">我的姐姐與兩個堂姐是好麻吉，她們仨小時候曾經夢想建造一個樹屋，可以久久住在一起，快樂地過日子。</div>
-            </div>
-
+            <div class="work-meta">姐妹花｜2021｜原子筆、黃素描紙｜39.4 × 54.6 cm</div>
+            <div class="work-seal">我的姐姐與兩個堂姐是好麻吉，她們仨小時候曾經夢想建造一個樹屋，可以久久住在一起，快樂地過日子。</div>
             <div class="thumb-container">
                 <img class="thumb-img active" src="姐妹花_全貌.jpg" onclick="switchImage('main-img-3', this)">
                 <img class="thumb-img" src="姐妹花_局部1.jpg" onclick="switchImage('main-img-3', this)">
@@ -549,22 +132,11 @@ h1 {
     </div>
 
     <div class="work-card">
-        <div class="work-img-container">
-            <div class="work-img-wrapper">
-                <img id="main-img-4" src="阿祖冰菓室_全貌.jpg">
-            </div>
-            
-            <div class="circle-toggle-trigger" onclick="toggleWorkContent(this)">
-                <i class="fas fa-chevron-down arrow-icon"></i>
-            </div>
-        </div>
-        
+        <div class="work-img-wrapper"><img id="main-img-4" src="阿祖冰菓室_全貌.jpg"></div>
+        <div class="circle-toggle-trigger" onclick="toggleWorkContent(this)"><i class="fas fa-chevron-down"></i></div>
         <div class="toggle-content">
-            <div class="details-content">
-                <div class="work-meta">阿祖冰菓室｜2024｜原子筆、黃素描紙｜39.4 × 54.6 cm</div>
-                <div class="work-seal">阿祖年輕時曾推著車子賣剉冰，老年失智後，依然記得如何手製粉圓、粉粿等配料。原本想要像《阿公的發財車》那樣、將賣冰的推車加上許多奇特功能的機器；但在進行到20%時，阿祖便過世了，於意我改變原本的構想，換成一幢冰菓室紙紮屋。</div>
-            </div>
-
+            <div class="work-meta">阿祖冰菓室｜2024｜原子筆、黃素描紙｜39.4 × 54.6 cm</div>
+            <div class="work-seal">阿祖年輕時曾推著車子賣剉冰，老年失智後，依然記得如何手製粉圓、粉粿等配料。原本想要像《阿公的發財車》那樣、將賣冰的推車加上許多奇特功能的機器；但在進行到20%時，阿祖便過世了，於意我改變原本的構想，換成一幢冰菓室紙紮屋。</div>
             <div class="thumb-container">
                 <img class="thumb-img active" src="阿祖冰菓室_全貌.jpg" onclick="switchImage('main-img-4', this)">
                 <img class="thumb-img" src="阿祖冰菓室_局部1.jpg" onclick="switchImage('main-img-4', this)">
@@ -574,156 +146,14 @@ h1 {
             </div>
         </div>
     </div>
-
 </main>
 
 <script>
-// ==========================================
-// 📦 網站的內建資料庫清單
-// ==========================================
-const websiteData = [
-    { title: "首頁 (首頁)", desc: "潘羽鍚的官方網站主頁與彩色個人肖像照。", url: "index.html" },
-    { title: "關於我 (走過)", desc: "潘羽鍚的個人簡介、藝術理念與生命經歷學歷。", url: "about.html" },
-    { title: "族譜系列", desc: "當代水墨與藝術創作——探索家族、血緣符號與記憶重組的作品單元。", url: "printmaking.html" },
-    { title: "擬古系列", desc: "傳統水墨美學的現代轉譯與模擬經典之筆墨實驗作品。", url: "pseudo-classic.html" },
-    { title: "文字創作 (寫過)", desc: "收錄潘羽鍚撰寫的藝術評論、散文、隨筆與文學創作。", url: "writing.html" }
-];
-
-let autoCloseTimer = null;
-
-// 🟢 智慧重置計時器：重新倒數 5 秒
-function resetAutoCloseTimer() {
-    clearAutoCloseTimer(); 
-    autoCloseTimer = setTimeout(function() {
-        var panel = document.getElementById('navPanel');
-        if (panel.classList.contains('open')) {
-            panel.classList.remove('open');
-        }
-    }, 5000); 
-}
-
-function clearAutoCloseTimer() {
-    if (autoCloseTimer) {
-        clearTimeout(autoCloseTimer);
-        autoCloseTimer = null;
-    }
-}
-
-// 🟢 點擊漢堡選單
-function toggleMenu() {
-    var panel = document.getElementById('navPanel');
-    panel.classList.toggle('open');
-    if (panel.classList.contains('open')) {
-        resetAutoCloseTimer();
-    } else {
-        clearAutoCloseTimer();
-    }
-}
-
-// 🟢 點擊「畫過」次選單
-function toggleArtMenu(event) {
-    if (event) event.stopPropagation(); 
-    var submenu = document.getElementById('art-submenu');
-    submenu.classList.toggle('open');
-    resetAutoCloseTimer();
-}
-
-// ==========================================
-// 🔍 搜尋遮罩控制與即時比對
-// ==========================================
-function openSearch() {
-    document.getElementById('searchOverlay').classList.add('open');
-    document.getElementById('searchInput').value = ""; 
-    document.getElementById('searchResults').innerHTML = ""; 
-    setTimeout(() => {
-        document.getElementById('searchInput').focus();
-    }, 100);
-}
-
-function closeSearch() {
-    document.getElementById('searchOverlay').classList.remove('open');
-}
-
-function performSearch() {
-    const query = document.getElementById('searchInput').value.trim().toLowerCase();
-    const resultsContainer = document.getElementById('searchResults');
-    
-    if (query === "") {
-        resultsContainer.innerHTML = "";
-        return;
-    }
-    
-    const filteredData = websiteData.filter(item => 
-        item.title.toLowerCase().includes(query) || 
-        item.desc.toLowerCase().includes(query)
-    );
-    
-    if (filteredData.length > 0) {
-        let htmlContent = "";
-        filteredData.forEach(item => {
-            htmlContent += `
-                <a href="${item.url}" class="result-item">
-                    <div class="result-title">${item.title}</div>
-                    <div class="result-desc">${item.desc}</div>
-                </a>
-            `;
-        });
-        resultsContainer.innerHTML = htmlContent;
-    } else {
-        resultsContainer.innerHTML = `<div class="no-result">找不到與「${query}」相符的作品或資訊</div>`;
-    }
-}
-
-// ==========================================
-// 🔘 點擊半透明圓形符號，開合全收納區塊
-// ==========================================
-function toggleWorkContent(triggerElement) {
-    var card = triggerElement.closest('.work-card');
-    if (!card) return;
-    
-    var content = card.querySelector('.toggle-content');
-    
-    if (content) {
-        triggerElement.classList.toggle('open');
-        content.classList.toggle('open');
-    }
-}
-
-// 切換主圖片與控制縮圖 Active 狀態
-function switchImage(mainImgId, thumbElement) {
-    var mainImg = document.getElementById(mainImgId);
-    if (!mainImg) return; 
-    
-    mainImg.src = thumbElement.src;
-    
-    var siblings = thumbElement.parentNode.getElementsByClassName('thumb-img');
-    for (var i = 0; i < siblings.length; i++) {
-        siblings[i].classList.remove('active');
-    }
-    thumbElement.classList.add('active');
-}
-
-// ==========================================
-// 🖱️ 全域智慧監聽
-// ==========================================
-
-// 點擊空白處關閉側欄
-document.addEventListener('click', function(event) {
-    var panel = document.getElementById('navPanel');
-    var toggleBtn = document.querySelector('.menu-toggle-btn');
-    if (panel.classList.contains('open') && !panel.contains(event.target) && !toggleBtn.contains(event.target)) {
-        panel.classList.remove('open');
-        clearAutoCloseTimer();
-    }
-});
-
-// 點擊側欄內重新計算 5 秒
-document.getElementById('navPanel').addEventListener('click', function() {
-    if (this.classList.contains('open')) {
-        resetAutoCloseTimer();
-    }
-});
+    function toggleMenu() { document.getElementById('navPanel').classList.toggle('open'); }
+    function toggleArtMenu(e) { e.stopPropagation(); document.getElementById('art-submenu').classList.toggle('open'); }
+    function toggleWorkContent(t) { t.classList.toggle('open'); t.nextElementSibling.classList.toggle('open'); }
+    function switchImage(id, t) { document.getElementById(id).src = t.src; Array.from(t.parentNode.children).forEach(img => img.classList.remove('active')); t.classList.add('active'); }
+    function openSearch() { document.getElementById('searchOverlay').classList.add('open'); }
 </script>
-
 </body>
 </html>
