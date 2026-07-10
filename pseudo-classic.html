@@ -44,15 +44,16 @@ body { font-family: Helvetica, Arial, sans-serif; margin: 0; padding: 0; backgro
 .search-overlay.open { opacity: 1; pointer-events: auto; }
 .search-input { width: 80%; max-width: 500px; background: transparent; border: none; border-bottom: 2px solid #ffffff; padding: 10px; color: #ffffff; font-size: 22px; text-align: center; outline: none; }
 
-.main-content { margin: 0 auto; padding: 120px 40px 60px 40px; max-width: 900px; width: 100%; box-sizing: border-box; }
+/* 調整 padding-top 讓標題組件整體上移 */
+.main-content { margin: 0 auto; padding: 60px 40px 60px 40px; max-width: 900px; width: 100%; box-sizing: border-box; }
 
-/* 標題與第一張圖的距離調整為 0px */
+/* 縮減標題與下方圖片的間距 */
 h1 { 
-    font-size: 24px; font-weight: normal; margin-bottom: 0px; 
+    font-size: 24px; font-weight: normal; margin-bottom: 15px; 
     letter-spacing: 2px; text-align: center; 
 }
 
-.work-card { margin-top: 40px; margin-bottom: 140px; }
+.work-card { margin-bottom: 140px; }
 
 /* 圖片容器 */
 .work-img-wrapper { 
@@ -80,7 +81,7 @@ h1 {
 @media (max-width: 768px) {
     .top-navbar { padding: 25px 25px; }
     .nav-panel { left: 25px; top: 65px; }
-    .main-content { padding: 100px 25px 40px 25px; }
+    .main-content { padding: 80px 25px 40px 25px; } /* 手機版同步上移 */
     .work-img-wrapper { height: 320px; } 
 }
 </style>
