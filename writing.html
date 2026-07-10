@@ -36,11 +36,28 @@ body {
 }
 .nav-panel.open { max-height: 450px; opacity: 1; padding: 15px 20px; }
 
-.home-icon-btn, .menu-item {
-    display: block; text-decoration: none; color: rgb(232, 182, 71); font-size: 15px; 
-    padding: 10px 0; cursor: pointer; letter-spacing: 3px;
+/* 修改第 36-43 行左右的區塊 */
+
+/* 家的符號設定 */
+.home-icon-btn {
+    display: block; 
+    text-decoration: none; 
+    color: rgb(232, 182, 71); 
+    font-size: 18px;    /* 👈 這裡是家符號的大小 */
+    padding: 10px 0; 
+    cursor: pointer;
 }
-.menu-item.active { font-weight: bold; }
+
+/* 其他選單項目設定 */
+.menu-item {
+    display: block; 
+    text-decoration: none; 
+    color: rgb(232, 182, 71); 
+    font-size: 15px;    /* 👈 這裡是選單文字的大小 */
+    padding: 10px 0; 
+    cursor: pointer; 
+    letter-spacing: 3px;
+}
 
 .submenu {
     max-height: 0; overflow: hidden; display: flex; flex-direction: column; gap: 12px; 
