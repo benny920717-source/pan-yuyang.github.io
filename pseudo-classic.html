@@ -45,11 +45,16 @@ body { font-family: Helvetica, Arial, sans-serif; margin: 0; padding: 0; backgro
 .search-input { width: 80%; max-width: 500px; background: transparent; border: none; border-bottom: 2px solid #ffffff; padding: 10px; color: #ffffff; font-size: 22px; text-align: center; outline: none; }
 
 .main-content { margin: 0 auto; padding: 120px 40px 60px 40px; max-width: 900px; width: 100%; box-sizing: border-box; }
-h1 { font-size: 24px; font-weight: normal; margin-bottom: 60px; letter-spacing: 2px; text-align: center; }
+
+/* 縮短標題與下方內容距離 */
+h1 { 
+    font-size: 24px; font-weight: normal; margin-bottom: 30px; 
+    letter-spacing: 2px; text-align: center; 
+}
 
 .work-card { margin-bottom: 140px; }
 
-/* 圖片容器：強制對齊到底部以計算精確間距 */
+/* 圖片容器 */
 .work-img-wrapper { 
     width: 100%; display: flex; justify-content: center; align-items: flex-end; 
     background-color: #574C57; height: 650px; overflow: hidden;
@@ -58,7 +63,7 @@ h1 { font-size: 24px; font-weight: normal; margin-bottom: 60px; letter-spacing: 
     max-width: 100%; max-height: 100%; object-fit: contain; display: block; 
 }
 
-/* 圓形按鈕：透過 margin-top: 10px 嚴格控制間距 */
+/* 圓形按鈕 */
 .circle-toggle-trigger { 
     width: 44px; height: 44px; background-color: rgba(0,0,0,0.25); border-radius: 50%; 
     display: flex; justify-content: center; align-items: center; cursor: pointer; 
