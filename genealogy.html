@@ -70,6 +70,8 @@ h1 { font-size: 24px; text-align: center; margin-bottom: 60px; letter-spacing: 2
 .thumb-container { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 15px; }
 .thumb-img { width: 80px; height: 80px; object-fit: cover; cursor: pointer; border: 1px solid #1d6664; opacity: 0.5; margin: 5px; transition: all 0.2s; }
 .thumb-img.active { opacity: 1; border-color: #ffffff; }
+.circle-toggle-trigger i { transition: transform 0.4s ease; }
+.circle-toggle-trigger.open i { transform: rotate(180deg); }
 
 /* 📱 手機版調整 */
 @media (max-width: 768px) {
@@ -138,7 +140,10 @@ h1 { font-size: 24px; text-align: center; margin-bottom: 60px; letter-spacing: 2
 <script>
     function toggleMenu() { document.getElementById('navPanel').classList.toggle('open'); }
     function toggleArtMenu(e) { e.stopPropagation(); document.getElementById('art-submenu').classList.toggle('open'); }
-    function toggleWorkContent(t) { t.classList.toggle('open'); t.nextElementSibling.classList.toggle('open'); }
+    function toggleWorkContent(t) { 
+    t.classList.toggle('open');  // 這行會同時幫圓形按鈕加上/移除 open，箭頭就會旋轉
+    t.nextElementSibling.classList.toggle('open'); 
+    }
     function switchImage(id, t) { document.getElementById(id).src = t.src; Array.from(t.parentNode.children).forEach(img => img.classList.remove('active')); t.classList.add('active'); }
     function openSearch() { /* 搜尋功能 */ }
 </script>
