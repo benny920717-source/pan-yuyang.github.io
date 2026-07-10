@@ -49,26 +49,28 @@ h1 { font-size: 24px; font-weight: normal; margin-bottom: 60px; letter-spacing: 
 
 .work-card { margin-bottom: 140px; }
 
-/* 圖片容器與間距設定 */
+/* 關鍵修正區：強制鎖定圖片容器與內容呈現 */
 .work-img-wrapper { 
     width: 100%; 
     display: flex; 
     justify-content: center; 
     align-items: center; 
     background-color: #574C57; 
-    height: 650px; 
+    height: 650px; /* 固定高度 */
     overflow: hidden; 
 }
 .work-img-wrapper img { 
     max-width: 100%; 
     max-height: 100%; 
-    object-fit: contain; 
+    object-fit: contain; /* 確保內容不會變形，且維持在框內 */
+    width: auto; 
+    height: auto; 
 }
 
 .trigger-container { 
     display: flex; 
     justify-content: center; 
-    margin-top: 10px; 
+    margin-top: 10px; /* 確保永遠保持 10px 間距 */
     margin-bottom: 25px; 
 }
 .circle-toggle-trigger { width: 44px; height: 44px; background-color: rgba(0,0,0,0.25); border-radius: 50%; display: flex; justify-content: center; align-items: center; cursor: pointer; transition: all 0.2s; }
@@ -88,7 +90,7 @@ h1 { font-size: 24px; font-weight: normal; margin-bottom: 60px; letter-spacing: 
     .top-navbar { padding: 25px 25px; }
     .nav-panel { left: 25px; top: 65px; }
     .main-content { padding: 100px 25px 40px 25px; }
-    .work-img-wrapper { height: 320px; } 
+    .work-img-wrapper { height: 320px; } /* 手機版維持固定高度 */
     .thumb-img { width: 60px; height: 60px; }
 }
 </style>
